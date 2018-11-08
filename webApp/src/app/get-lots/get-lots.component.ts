@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BEService} from '../be.service';
 
 @Component({
   selector: 'app-get-lots',
@@ -9,7 +10,7 @@ export class GetLotsComponent implements OnInit {
 
   lotname = "";
   lots = [];
-  constructor() {
+  constructor(private backend:BEService) {
       
    }
   
@@ -26,6 +27,10 @@ export class GetLotsComponent implements OnInit {
 
   finish(){
       console.log(this.lots);
+      this.backend.postlots(this.lots).subscribe((data:string) => {
+          console.log("--");
+          console.log(data);
+      });
   }
 
 
