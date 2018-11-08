@@ -8,12 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { GetLotsComponent } from './get-lots/get-lots.component';
+import { DefineLotsComponent } from './define-lots/define-lots.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    GetLotsComponent
+    GetLotsComponent,
+    DefineLotsComponent
   ],
   imports: [
     BrowserModule,

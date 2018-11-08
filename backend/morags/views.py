@@ -6,7 +6,10 @@ from django.http import HttpResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.http import JsonResponse
+from django.core import serializers
 
+from models import *
 
 @method_decorator(csrf_exempt, name='dispatch')
 class Lots(View):
@@ -15,4 +18,16 @@ class Lots(View):
         return HttpResponse("asd")
 
     def get(self, request):
-        return HttpResponse("qwe")
+        data = [{
+            'lot_id': 12,
+            'label' : "asdasd",
+            'capacity': 52
+        },
+        {
+            'lot_id': 62,
+            'label' : "lot5",
+            'capacity': 527
+        }]
+        return JsonResponse(data, safe=False)
+        data = serializers.serialize("json", ParkingLot.objects.all())
+        return HttpResponse(data)

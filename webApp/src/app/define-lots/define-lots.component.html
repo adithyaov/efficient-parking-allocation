@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Define the parking lots below</h3>
+            <div *ngFor="let lot of lots">
+                Id: {{lot.lot_id}}
+                Label: {{lot.label}}
+                Capacity: {{lot.capacity}}
+            </div>
+            <button class="btn btn-success" (click)="finish()" >Next</button>
+        </div>
+    </div>
+</div>

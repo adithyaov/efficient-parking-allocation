@@ -19,5 +19,5 @@ from morags.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^postlots/', Lots.as_view()),
+    url(r'^plots/', Lots.as_view()),
 ]

@@ -18,9 +18,13 @@ export class BEService {
 
   baseURL = "http://localhost:8000/";
 
-  postlotsURL = this.baseURL + 'postlots/';
+  plotsURL = this.baseURL + 'plots/';
 
   postlots(lots){
-      return this.http.post(this.postlotsURL, lots, {responseType: 'text'});
+      return this.http.post(this.plotsURL, lots, {responseType: 'text'});
+  }
+
+  getlots(){
+      return this.http.get(this.plotsURL, {responseType: 'json'});
   }
 }
