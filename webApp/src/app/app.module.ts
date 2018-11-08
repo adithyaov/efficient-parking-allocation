@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { GetLotsComponent } from './get-lots/get-lots.component';
 import { DefineLotsComponent } from './define-lots/define-lots.component';
+import { BuildingsComponent } from './buildings/buildings.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DefineLotsComponent } from './define-lots/define-lots.component';
     NavComponent,
     GetLotsComponent,
     FileSelectDirective,
-    DefineLotsComponent
+    DefineLotsComponent,
+    BuildingsComponent
   ],
   imports: [
     BrowserModule,

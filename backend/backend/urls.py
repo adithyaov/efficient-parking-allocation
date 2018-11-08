@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^plots/', Lots.as_view()),
     url(r'^define-plots/', DefinePlot.as_view()),
+    url(r'^buildings/', Building.as_view()),
 ]

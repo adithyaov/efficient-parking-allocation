@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PLot} from '../globals/plot';
+import {Router} from '@angular/router';
 import {BEService} from '../be.service';
 
 @Component({
@@ -9,7 +10,7 @@ import {BEService} from '../be.service';
 })
 export class DefineLotsComponent implements OnInit {
 
-  constructor(private backend: BEService) { }
+  constructor(private backend: BEService, private router:Router) { }
   lots;
   baseURL = this.backend.baseURL;
 
@@ -22,6 +23,7 @@ export class DefineLotsComponent implements OnInit {
   finish(){
       this.backend.post_define_lots(this.lots).subscribe((data) =>{
           console.log(data);
+          this.router.navigateByUrl('/buildings');
       })
   }
 

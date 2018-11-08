@@ -37,3 +37,9 @@ class DefinePlot(View):
     def post(self, request):
         print (request.body)
         return HttpResponse("rty")
+
+@method_decorator(csrf_exempt, name='dispatch')
+class Building(View):
+    def post(self, request):
+        print (request.body)
+        return HttpResponse("rty")
