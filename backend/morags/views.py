@@ -31,3 +31,9 @@ class Lots(View):
         return JsonResponse(data, safe=False)
         data = serializers.serialize("json", ParkingLot.objects.all())
         return HttpResponse(data)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class DefinePlot(View):
+    def post(self, request):
+        print (request.body)
+        return HttpResponse("rty")

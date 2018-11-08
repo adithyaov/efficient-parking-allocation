@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FileSelectDirective } from 'ng2-file-upload';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 
@@ -15,6 +16,7 @@ import { DefineLotsComponent } from './define-lots/define-lots.component';
     AppComponent,
     NavComponent,
     GetLotsComponent,
+    FileSelectDirective,
     DefineLotsComponent
   ],
   imports: [

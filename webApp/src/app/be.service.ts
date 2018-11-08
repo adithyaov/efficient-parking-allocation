@@ -19,6 +19,7 @@ export class BEService {
   baseURL = "http://localhost:8000/";
 
   plotsURL = this.baseURL + 'plots/';
+  defineplotsURL = this.baseURL + 'define-plots/';
 
   postlots(lots){
       return this.http.post(this.plotsURL, lots, {responseType: 'text'});
@@ -26,5 +27,9 @@ export class BEService {
 
   getlots(){
       return this.http.get(this.plotsURL, {responseType: 'json'});
+  }
+
+  post_define_lots(lots){
+      return this.http.post(this.defineplotsURL, { lots: lots}, {responseType: 'text'});
   }
 }
