@@ -22,6 +22,14 @@ class Lots(View):
             'lot_id': 12,
             'label' : "asdasd",
             'capacity': 52
+        },{
+            'lot_id': 15,
+            'label' : "hjykd",
+            'capacity': 52
+        },{
+            'lot_id': 19,
+            'label' : "aethryjutkyd",
+            'capacity': 52
         },
         {
             'lot_id': 62,
@@ -40,6 +48,25 @@ class DefinePlot(View):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class Building(View):
+
+    def get(self, request):
+        data = [
+            {"building_id": 0, "label": "someplace"},
+            {"building_id": 3, "label": "someotherplace"},
+            {"building_id": 5, "label": "someot573ace"},
+            {"building_id": 32, "label": "796eotherplace"},
+            {"building_id": 31, "label": "8938524rplace"},
+        ]
+        return JsonResponse(data, safe=False)
+        data = serializers.serialize("json", Building.objects.all())
+        return HttpResponse(data)
+
     def post(self, request):
         print (request.body)
         return HttpResponse("rty")
+
+@method_decorator(csrf_exempt, name='dispatch')
+class Interconnects(View):
+    def post(self, request):
+        print(request.body) # a dictionary with ids that gives distances between plots and buildings
+        return HttpResponse("hmm")

@@ -27,6 +27,7 @@ export class BuildingsComponent implements OnInit {
       console.log(this.buildings);
       this.backend.postbuildings(this.buildings).subscribe((data:string) => {
           console.log(data);
+          this.router.navigateByUrl('/interconnects');
       });
   }
 

@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 import { GetLotsComponent } from './get-lots/get-lots.component';
 import { DefineLotsComponent } from './define-lots/define-lots.component';
 import { BuildingsComponent } from './buildings/buildings.component';
+import { InterconnectsComponent } from './interconnects/interconnects.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BuildingsComponent } from './buildings/buildings.component';
     GetLotsComponent,
     FileSelectDirective,
     DefineLotsComponent,
-    BuildingsComponent
+    BuildingsComponent,
+    InterconnectsComponent
   ],
   imports: [
     BrowserModule,

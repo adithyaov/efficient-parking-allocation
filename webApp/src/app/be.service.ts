@@ -21,6 +21,7 @@ export class BEService {
   plotsURL = this.baseURL + 'plots/';
   defineplotsURL = this.baseURL + 'define-plots/';
   buildingsURL = this.baseURL + 'buildings/';
+  interconnectsURL = this.baseURL + 'interconnects/';
 
   postlots(lots){
       return this.http.post(this.plotsURL, lots, {responseType: 'text'});
@@ -36,5 +37,13 @@ export class BEService {
 
   postbuildings(buildings){
       return this.http.post(this.buildingsURL, buildings, {responseType: 'text'});
+  }
+
+  getbuildings(){
+    return this.http.get(this.buildingsURL, {responseType: 'json'});
+  }
+
+  postinterconnects(interconnects){
+    return this.http.post(this.interconnectsURL, interconnects, {responseType: 'text'});
   }
 }

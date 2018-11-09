@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^plots/', Lots.as_view()),
     url(r'^define-plots/', DefinePlot.as_view()),
     url(r'^buildings/', Building.as_view()),
+    url(r'^interconnects/', Building.as_view()),
 ]
