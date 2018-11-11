@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Add the buildings below</h3>
+            <input type="text" name="lotname" [(ngModel)]="building_name">
+            <button class="btn btn-primary" (click)="add_building()">Add a building</button>
+            <ol>
+                <li *ngFor="let building of buildings">
+                    {{building}}
+                </li>
+            </ol>
+            <button class="btn btn-success" (click)="finish()" >Next</button>
+        </div>
+    </div>
+</div>

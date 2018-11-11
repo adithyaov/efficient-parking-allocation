@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Define the parking lots below</h3>
+            <form action="{{baseURL}}define-lots/" method="POST" enctype="multipart/form-data">
+                <div class="alert alert-dark" *ngFor="let lot of lots">
+                    Id: {{lot.lot_id}}<br>
+                    Label: {{lot.label}}<br>
+                    Capacity: <input type="text" [(ngModel)]="lot.capacity" name="{{lot_id}}_capacity"><br>
+                    <!-- Upload an areial view: <input type="file" name="{{lot_id}}_image"> -->
+                </div>
+                <button class="btn btn-success" (click)="finish()" >Next</button>
+            </form>
+        </div>
+    </div>
+</div>

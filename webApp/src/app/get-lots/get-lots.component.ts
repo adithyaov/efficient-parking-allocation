@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import {BEService} from '../be.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class GetLotsComponent implements OnInit {
 
   lotname = "";
   lots = [];
-  constructor(private backend:BEService) {
+  constructor(private backend:BEService, private router:Router) {
       
    }
   
@@ -28,8 +29,8 @@ export class GetLotsComponent implements OnInit {
   finish(){
       console.log(this.lots);
       this.backend.postlots(this.lots).subscribe((data:string) => {
-          console.log("--");
           console.log(data);
+          this.router.navigateByUrl('/define-lots');
       });
   }
 

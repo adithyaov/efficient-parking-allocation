@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FileSelectDirective } from 'ng2-file-upload';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 
@@ -8,12 +9,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { GetLotsComponent } from './get-lots/get-lots.component';
+import { DefineLotsComponent } from './define-lots/define-lots.component';
+import { BuildingsComponent } from './buildings/buildings.component';
+import { InterconnectsComponent } from './interconnects/interconnects.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    GetLotsComponent
+    GetLotsComponent,
+    FileSelectDirective,
+    DefineLotsComponent,
+    BuildingsComponent,
+    InterconnectsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Preferneces</h3>
+            <div class="card-deck" *ngFor="let building of buildings" style="margin-bottom: 10px;">
+                <div class="card bg-light" *ngFor="let lot of lots" style="padding: 3px;">{{building.label}} <-> {{lot.label}}    <input type="number" [(ngModel)]="interconnects[building.building_id][lot.lot_id]" style="display: inline-block;"></div>
+            </div>
+            <button class="btn btn-success" (click)="finish()" >Next</button>
+        </div>
+    </div>
+</div>
