@@ -1,15 +1,24 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
-            <h3>Add the buildings below</h3>
-            <input type="text" name="lotname" [(ngModel)]="building_name">
-            <button class="btn btn-primary" (click)="add_building()">Add a building</button>
-            <ol>
-                <li *ngFor="let building of buildings">
-                    {{building}}
-                </li>
-            </ol>
-            <button class="btn btn-success" (click)="finish()" >Next</button>
+        <div class="col-sm-12" style="padding: 20px;">
+            <h3>Add the destinations below</h3>
+            <p>Please enter the name and coordinates in decimal notation for the destinations. Parking lots are allotted once the user requests parking for a particular destination.</p>
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                    </tr>
+                    <tr *ngFor="let building of buildings">
+                        <td><input type="text" name="name[]" [(ngModel)]="building.name" placeholder="Name" form="plotform"></td>
+                        <td><input type="number" name="lat[]" [(ngModel)]="building.lat" form="plotform"></td>
+                        <td><input type="number" name="long[]" [(ngModel)]="building.long" form="plotform"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success" type="button" (click)="addrow()" >+ Add a building</button>
+            <button style="margin-left: 20px" class="btn btn-success" (click)="finish()" >Next</button>
         </div>
     </div>
 </div>
