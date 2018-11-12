@@ -37,14 +37,14 @@ def get_lots():
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
     rows = c.execute("SELECT id, name FROM PLot").fetchall()
-    return jsonify(rows)
+    return jsonify(map(lambda x: {"id": x[0], "name": x[1]}, rows))
 
 @app.route('/get/destinations', methods=['GET'])
 def get_destinations():
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
     rows = c.execute("SELECT id, name FROM Destinations").fetchall()
-    return jsonify(rows)
+    return jsonify(map(lambda x: {"id": x[0], "name": x[1]}, rows))
 
 
 @app.route('/post/interconnects', methods=['POST'])
@@ -66,7 +66,7 @@ def get_pspaces():
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
     rows = c.execute("SELECT id, name FROM PSpace").fetchall()
-    return jsonify(rows)
+    return jsonify(map(lambda x: {"id": x[0], "name": x[1]}, rows)
 
 @app.route('/get/pspaceimage/<id>', methods=['GET'])
 def get_pspaceimage(id):
