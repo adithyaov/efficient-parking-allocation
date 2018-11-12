@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BEService} from '../be.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import {BEService} from '../be.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private backend: BEService) { }
+  constructor(private backend: BEService, private router:Router) { }
   plots:any = [];
   destinations:any = [];
   parkingdata;
@@ -20,6 +21,9 @@ export class HomeComponent implements OnInit {
       // this.destinations.push({'id': 6, 'name': 'mayank'});
       // this.destinations.push({'id': 5, 'name': 'adit'});
       this.backend.getparkinglots_poll().subscribe((data)=>{
+        if(data == []){
+          this.router.navigateByUrl('/admin');
+        }
         this.plots = data;
       });
       this.backend.getbuildings().subscribe((data) =>{
