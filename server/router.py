@@ -140,6 +140,7 @@ def get_eff_p(did, gid):
 @app.route('/get/parkinglots-poll', methods=['GET'])
 def get_poll():
     conn = sqlite3.connect('data.db')
+    f.update_current_capacity(conn)
     c = conn.cursor()
     rows = c.execute("SELECT * FROM PLot").fetchall()
     l = []
