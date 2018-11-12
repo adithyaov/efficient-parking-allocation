@@ -2,7 +2,8 @@ import numpy as np
 import cv_func
 import cv2
 
-def mod1_ps_init(park_image, thres, level):
+def mod0_ps_bond(image, thres, level):
+	park_image = image.copy()
 	im, (im2, contours, hierarchy) = cv_func.detect_contour(park_image, thres)
 	cnt, x_y, r = cv_func.detect_hierarchy(contours, hierarchy, level)
 
@@ -10,9 +11,21 @@ def mod1_ps_init(park_image, thres, level):
 	cv2.waitKey(0)
 	cv2.destroyAllWindows()
 
+	return cnt[0]
+
+def mod1_ps_init(image, thres, level):
+	park_image = image.copy()
+	im, (im2, contours, hierarchy) = cv_func.detect_contour(park_image, thres)
+	cnt, x_y, r = cv_func.detect_hierarchy(contours, hierarchy, level)
+
+	cv_func.display_contour(im, cnt, "detected_parking_lots")
+	cv2.waitKey(0)
+	cv2.destroyAllWindows()
+
 	return (x_y, r)
 
-def mod2_ps_detect(park_image, thres, x_y, r, level):
+def mod2_ps_detect(image, thres, x_y, r, level):
+	park_image = image.copy()
 	cropped_images = cv_func.crop_image(park_image, x_y, 2*r)
 	state = []
 
@@ -31,7 +44,7 @@ def mod2_ps_detect(park_image, thres, x_y, r, level):
 				cv2.circle(im, (x, y), r, (0, 255, 255), 4)
 
 		
-		cv2.imshow("out",im)
+		cv2.imshow("state",im)
 		cv2.waitKey(0)
 	
 		state.append(s)
