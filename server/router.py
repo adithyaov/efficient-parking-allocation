@@ -140,6 +140,7 @@ def get_eff_p(did, gid):
 @app.route('/get/parkinglots-poll', methods=['GET'])
 def get_poll():
     conn = sqlite3.connect('data.db')
+    f.update_current_capacity(conn)
     c = conn.cursor()
     rows = c.execute("SELECT * FROM PLot").fetchall()
     l = []
@@ -157,6 +158,7 @@ def get_poll():
             'freespace': map(lambda x: {'id': x[0], 'name': x[1], 'capacity': x[2]}, rs)
             })
 
+    print l
     return jsonify(l)
 
 app.run(host='0.0.0.0', port=8080)
