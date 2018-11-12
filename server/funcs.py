@@ -4,7 +4,6 @@ def update_current_capacity(conn):
                             INNER JOIN PSpace AS P ON A.p_space_id = P.id 
                             WHERE A.reserved=0 
                             GROUP BY P.p_lot_id, P.group_id''').fetchall()
-    print rows
     for row in rows:
         c.execute("INSERT OR IGNORE INTO CurrentCapacity (p_lot_id, group_id, capacity) VALUES ({lid}, {gid}, {c})"\
                     .format(lid=row[0], gid=row[1], c=row[2]))
