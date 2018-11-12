@@ -1,14 +1,14 @@
 import numpy as np
+
 import imutils
 import math
 import cv2
 
 def detect_contour(image, thres_val):
-	im = cv2.imread(image)
-	im_gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
+	im_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 	ret, im_thresh = cv2.threshold(im_gray, thres_val, 255, 0)
 	
-	return (im, cv2.findContours(im_thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE))
+	return (image, cv2.findContours(im_thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE))
 
 def detect_hierarchy(contours, hierarchy, level):
 	x_y = []
