@@ -15,7 +15,7 @@ def post_lots():
     content = request.get_json()
     for x in content:
         c.execute('''INSERT INTO PLot (name, lat, long, capacity)
-                        VALUES ({name}, {lat}, {long}, {capacity})'''\
+                        VALUES ("{name}", {lat}, {long}, {capacity})'''\
                             .format(name=x['name'], lat=x['lat'], long=x['long'], capacity=x['capacity']))
     conn.commit()
     return "Ta-da!"
@@ -27,7 +27,7 @@ def post_destinations():
     content = request.get_json()
     for x in content:
         c.execute('''INSERT INTO Destinations (name, lat, long)
-                        VALUES ({name}, {lat}, {long})'''\
+                        VALUES ("{name}", {lat}, {long})'''\
                             .format(name=x['name'], lat=x['lat'], long=x['long']))
     conn.commit()
     return "Ta-da!"
@@ -81,7 +81,7 @@ def post_pspaces():
     c = conn.cursor()
     content = request.get_json()
     for x in content:
-        c.execute('''UPDATE PSpace set name={name}
+        c.execute('''UPDATE PSpace set name="{name}"
                         WHERE id={id}'''\
                             .format(id=x['id'], name=x['name']))
     conn.commit()
