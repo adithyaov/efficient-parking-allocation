@@ -5,7 +5,7 @@ INSERT INTO PLot (name, lat, long, capacity)
 		("Lot 3", 1, 4, 3),
 		("Lot 4", 6, 2, 1);
 
-INSERT INTO Destinations (id, name, lat, long)
+INSERT INTO Destinations (name, lat, long)
 	VALUES
 		("Block 1", 0, 0),
 		("Block 2", 2, 3),
@@ -26,13 +26,13 @@ INSERT INTO DistanceGraph (p_lot_id, destination_id, distance)
 		(4, 2, 27), 
 		(4, 3, 79);
 
-INSERT INTO PGroup (id, name)
+INSERT INTO PGroup (name)
 	VALUES
 		("general"),
 		("handicappped"),
 		("director");
 
-INSERT INTO PSpace (id, name, p_lot_id, group_id)
+INSERT INTO PSpace (name, p_lot_id, group_id)
 	VALUES
 		("A1", 1, 1),
 		("A2", 1, 1),
