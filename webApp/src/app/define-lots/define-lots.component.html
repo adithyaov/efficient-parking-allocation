@@ -15,8 +15,8 @@
                     </tr>
                     <tr *ngFor="let plot of plots">
                         <td><input type="text" name="name[]" [(ngModel)]="plot.name" placeholder="Name" form="plotform"></td>
-                        <td><input type="number" name="lat[]" [(ngModel)]="plot.latitude" form="plotform"></td>
-                        <td><input type="number" name="long[]" [(ngModel)]="plot.longitude" form="plotform"></td>
+                        <td><input type="number" name="lat[]" [(ngModel)]="plot.lat" form="plotform"></td>
+                        <td><input type="number" name="long[]" [(ngModel)]="plot.long" form="plotform"></td>
                         <td><input type="number" name="capacity[]" [(ngModel)]="plot.capacity" form="plotform"></td>
                         <!-- <td><input type="file" name="image[]" (change)="onFileChanged($event, plot.sl)" form="plotform"></td> -->
                     </tr>

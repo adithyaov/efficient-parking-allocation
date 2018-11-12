@@ -12,8 +12,8 @@
                     </tr>
                     <tr *ngFor="let building of buildings">
                         <td><input type="text" name="name[]" [(ngModel)]="building.name" placeholder="Name" form="plotform"></td>
-                        <td><input type="number" name="lat[]" [(ngModel)]="building.latitude" form="plotform"></td>
-                        <td><input type="number" name="long[]" [(ngModel)]="building.longitude" form="plotform"></td>
+                        <td><input type="number" name="lat[]" [(ngModel)]="building.lat" form="plotform"></td>
+                        <td><input type="number" name="long[]" [(ngModel)]="building.long" form="plotform"></td>
                     </tr>
                 </tbody>
             </table>

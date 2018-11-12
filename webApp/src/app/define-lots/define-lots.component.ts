@@ -16,12 +16,12 @@ export class DefineLotsComponent implements OnInit {
   baseURL = this.backend.baseURL;
 
   ngOnInit() {
-      this.plots = [{'sl': 0,'name': 'test', 'latitude': 25.3, 'longitude': 63.3, 'capacity': 23, 'image': null}];
+      this.plots = [{'sl': 0,'name': 'test', 'lat': 25.3, 'long': 63.3, 'capacity': 23, 'image': null}];
   }
 
   addrow(){
     this.sl = this.sl + 1;
-    this.plots.push({'sl': this.sl,'name': '', 'latitude': 0, 'longitude': 0, 'capacity': 0, 'image': null});
+    this.plots.push({'sl': this.sl,'name': '', 'lat': 0, 'long': 0, 'capacity': 0, 'image': null});
   }
 
   onFileChanged(event, sl) {
