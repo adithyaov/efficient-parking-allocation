@@ -54,9 +54,13 @@ def post_interconnects():
     destinations = request.get_json()
     for d in destinations.keys():
         for p in destinations[d].keys():
-            c.execute('''INSERT INTO DistanceGraph(p_lot_id, destination_id, distance)
+            c.execute('''INSERT OR IGNORE INTO DistanceGraph(p_lot_id, destination_id, distance)
                             VALUES ({pid}, {did}, {dist})'''\
                                 .format(pid=p, did=d, dist=destinations[d][p]))
+            c.execute('''UPDATE DistanceGraph set dist = {dist}
+                            WHERE pid = {pid}
+                                AND did = {did}'''\
+                                    .format(pid=p, did=d, dist=destinations[d][p]))
     conn.commit()
     return "Ta-da!"
 
