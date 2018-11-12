@@ -69,7 +69,7 @@ def get_interconnects():
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
     rows = c.execute("SELECT p_lot_id, destination_id, distance FROM DistanceGraph").fetchall()
-    jsonify(map(lambda x: {"p_lot_id": x[0], "destination_id": x[1], "distance": x[2]})) 
+    return jsonify(map(lambda x: {"p_lot_id": x[0], "destination_id": x[1], "distance": x[2]}, rows)) 
 
 @app.route('/get/pspaces', methods=['GET'])
 def get_pspaces():
