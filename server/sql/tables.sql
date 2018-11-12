@@ -1,34 +1,34 @@
-CREATE TABLE PLot (id INT PRIMARY KEY AUTOINCREMENT, 
+CREATE TABLE PLot (id INTEGER PRIMARY KEY AUTOINCREMENT, 
 	name TEXT, 
 	lat REAL, 
 	long REAL, 
-	capacity INT);
+	capacity INTEGER);
 
-CREATE TABLE Destinations (id INT PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE Destinations (id INTEGER PRIMARY KEY AUTOINCREMENT,
 	name TEXT, 
 	lat REAL, 
 	long REAL);
 
-CREATE TABLE DistanceGraph (p_lot_id INT, 
-	destination_id INT, 
-	distance INT,
+CREATE TABLE DistanceGraph (p_lot_id INTEGER, 
+	destination_id INTEGER, 
+	distance INTEGER,
 	CONSTRAINT UNQPD UNIQUE (p_lot_id, destination_id));
 
-CREATE TABLE PSpace (id INT PRIMARY KEY AUTOINCREMENT, 
+CREATE TABLE PSpace (id INTEGER PRIMARY KEY AUTOINCREMENT, 
 	name TEXT, 
-	p_lot_id INT, 
-	group_id INT);
+	p_lot_id INTEGER, 
+	group_id INTEGER);
 
-CREATE TABLE PGroup (id INT PRIMARY KEY AUTOINCREMENT, 
+CREATE TABLE PGroup (id INTEGER PRIMARY KEY AUTOINCREMENT, 
 	name TEXT);
 
-CREATE TABLE TempReserves (p_space_id INT, 
-	till_timestamp INT);
+CREATE TABLE TempReserves (p_space_id INTEGER, 
+	till_timestamp INTEGER);
 
-CREATE TABLE Allocations (p_space_id INT PRIMARY KEY, 
+CREATE TABLE Allocations (p_space_id INTEGER PRIMARY KEY, 
 	reserved BOOL);
 
-CREATE TABLE CurrentCapacity (p_lot_id INT, 
-	group_id INT, 
-	capacity INT, 
+CREATE TABLE CurrentCapacity (p_lot_id INTEGER, 
+	group_id INTEGER, 
+	capacity INTEGER, 
 	CONSTRAINT UNQIDF UNIQUE (p_lot_id, group_id));
