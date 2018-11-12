@@ -3,10 +3,6 @@ import {Router} from '@angular/router';
 import {BEService} from '../be.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
-interface pspacedata{
-    image:any;
-    names:any;
-}
 @Component({
   selector: 'app-pspace',
   templateUrl: './pspace.component.html',
@@ -28,12 +24,15 @@ export class PSpaceComponent implements OnInit {
   setlabel(id){
       this.pspaces = null;
       this.ImageLink = null;
-      this.backend.getpspacenames(id).subscribe((data:pspacedata)=>{
-          this.pspaces = data.names;
-          let urlCreator = window.URL;
-        this.ImageLink = this.sanitizer.bypassSecurityTrustUrl(
-            urlCreator.createObjectURL(data.image));
-        document.getElementById("pspace-div").style.display = 'block';
+      this.backend.getpspacenames(id).subscribe((data)=>{
+          this.pspaces = data;
+          this.backend.getpspaceimage(id).subscribe((img) => {
+                let urlCreator = window.URL;
+                console.log(data)
+              this.ImageLink = this.sanitizer.bypassSecurityTrustUrl(
+                  urlCreator.createObjectURL(img));
+              document.getElementById("pspace-div").style.display = 'block';
+          })
       })
   }
 

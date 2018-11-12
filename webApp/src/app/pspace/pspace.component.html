@@ -5,14 +5,14 @@
             <p>Please enter labels for parking spaces marked on the image. You may select the parking lot from below.</p>
             <ul>
                 <li *ngFor="let lot of lots" (click)="setlabel(lot.id)">
-                    <a href="#">{{lot.name}}</a>
+                    <a>{{lot.name}}</a>
                 </li>
             </ul>
             <div class="row" style="display: none;" id="pspace-div">
                 <div class="col-sm-6">
                     <img [src]="ImageLink" id="plotimage">
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <table class="table table-striped">
                         <tbody>
                             <tr>

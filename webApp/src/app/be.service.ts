@@ -26,8 +26,9 @@ export class BEService {
   buildingsURL = this.baseURL + 'buildings/';
   interconnectsURL = this.baseURL + 'interconnects/';
   cameraguideURL = this.baseURL + 'camera-guide/';
-  getpspacenameURL = this.baseURL + 'get/pspace';
-  postpspacenameURL = this.baseURL + 'post/pspace';
+  getpspacenameURL = this.baseURL + 'get/pspaces';
+  getpspaceimageURL = this.baseURL + 'get/pspaceimage'
+  postpspacenameURL = this.baseURL + 'post/pspaces';
 
   postlots(lots){
       return this.http.post(this.plotsURL, lots, {responseType: 'text'});
@@ -70,6 +71,10 @@ export class BEService {
 
   getpspacenames(id){
     return this.http.get(this.getpspacenameURL + '?id=' + id, {responseType: 'json'});
+  }
+
+  getpspaceimage(id){
+    return this.http.get(this.getpspaceimageURL + '?id=' + id, {responseType: 'blob'});
   }
 
   postpspacenames(pspaces){
