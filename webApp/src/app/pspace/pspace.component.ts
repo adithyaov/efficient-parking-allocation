@@ -16,7 +16,7 @@ export class PSpaceComponent implements OnInit {
 
   constructor(private backend: BEService, private router:Router, private sanitizer: DomSanitizer) { }
   lots = [{'name': 'asd', 'id':2}];
-  pspace;
+  pspaces;
   ImageLink;
 
   ngOnInit() {
@@ -26,13 +26,21 @@ export class PSpaceComponent implements OnInit {
   }
 
   setlabel(id){
+      this.pspaces = null;
+      this.ImageLink = null;
       this.backend.getpspacenames(id).subscribe((data:pspacedata)=>{
-          this.pspace = data.names;
+          this.pspaces = data.names;
           let urlCreator = window.URL;
         this.ImageLink = this.sanitizer.bypassSecurityTrustUrl(
             urlCreator.createObjectURL(data.image));
-        document.getElementById("plotimage").style.display = 'block';
+        document.getElementById("pspace-div").style.display = 'block';
       })
+  }
+
+  finish(){
+      this.backend.postpspacenames(this.pspaces).subscribe((data)=>{
+          console.log(data);
+      });
   }
 
 }

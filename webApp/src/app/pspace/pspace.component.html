@@ -8,11 +8,25 @@
                     <a href="#">{{lot.name}}</a>
                 </li>
             </ul>
-            <div class="row">
+            <div class="row" style="display: none;" id="pspace-div">
                 <div class="col-sm-6">
                     <img [src]="ImageLink" id="plotimage">
                 </div>
-                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <th>Label</th>
+                            </tr>
+                            <tr *ngFor="let pspace of pspaces">
+                                <td>{{pspace.id}}</td>
+                                <td><input type="text" [(ngModel)]="pspace.name"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button style="margin-left: 20px" class="btn btn-success" type="button" (click)="finish()" >Update</button>
+                </div>
             </div>
         </div>
     </div>
