@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {globals} from './globals/globals';
+import { of } from 'rxjs/observable/of'
 
 const httpOptions = {
 headers: new HttpHeaders({
@@ -23,6 +24,7 @@ export class BEService {
   defineplotsURL = this.baseURL + 'define-plots/';
   buildingsURL = this.baseURL + 'buildings/';
   interconnectsURL = this.baseURL + 'interconnects/';
+  cameraguideURL = this.baseURL + 'camera-guide/';
 
   postlots(lots){
       return this.http.post(this.plotsURL, lots, {responseType: 'text'});
@@ -53,5 +55,13 @@ export class BEService {
 
   postinterconnects(interconnects){
     return this.http.post(this.interconnectsURL, interconnects, {responseType: 'text'});
+  }
+
+  getcameraguide(image, scale){
+    var fdata = new FormData();
+    fdata.append('image', image);
+    fdata.append('scale', scale);
+    return of(image);
+    // return this.http.post(this.cameraguideURL, fdata, {responseType: 'blob'});
   }
 }

@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" style="padding: 20px;">
+            <h3>Upload Image</h3>
+            <p>Please upload an areial photograph or schematic diagram of the parking lot along with the scale.</p>
+            <div style="padding: 10px;">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center;">Image:</td>
+                            <td><input type="file" name="image" (change)="onFileChanged($event)"></td>
+                        </tr>
+                        <tr>
+                            <td  style="text-align: center;">Scale: (1:x)</td>
+                            <td><input type="number" name="scale" [(ngModel)]="scale"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button style="margin-left: 20px" class="btn btn-success" type="button" (click)="finish()" >Next</button>
+            <img [src]="ImageLink" id="responseimage" style="display: none;">
+        </div>
+    </div>
+</div>
