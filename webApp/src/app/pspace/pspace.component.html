@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" style="padding: 20px;">
+            <h3>Setup</h3>
+            <p>Please enter labels for parking spaces marked on the image. You may select the parking lot from below.</p>
+            <ul>
+                <li *ngFor="let lot of lots" (click)="setlabel(lot.id)">
+                    <a href="#">{{lot.name}}</a>
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-sm-6">
+                    <img [src]="ImageLink" id="plotimage">
+                </div>
+                <div class="col-sm-6"></div>
+            </div>
+        </div>
+    </div>
+</div>

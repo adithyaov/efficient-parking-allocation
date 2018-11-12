@@ -6,6 +6,7 @@ import { BuildingsComponent } from './buildings/buildings.component';
 import { InterconnectsComponent } from './interconnects/interconnects.component';
 import { CameraGuideComponent } from './camera-guide/camera-guide.component';
 import { AdminComponent } from './admin/admin.component';
+import { PSpaceComponent } from './pspace/pspace.component';
 
 const routes: Routes = [
     { path: 'get-lots', component: GetLotsComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
     { path: 'interconnects', component: InterconnectsComponent },
     { path: 'camera-guide', component: CameraGuideComponent },
     { path: 'admin', component: AdminComponent },
+    { path: 'define-pspace', component: PSpaceComponent },
 ];
 
 @NgModule({

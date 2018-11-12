@@ -14,6 +14,7 @@ import { BuildingsComponent } from './buildings/buildings.component';
 import { InterconnectsComponent } from './interconnects/interconnects.component';
 import { CameraGuideComponent } from './camera-guide/camera-guide.component';
 import { AdminComponent } from './admin/admin.component';
+import { PSpaceComponent } from './pspace/pspace.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AdminComponent } from './admin/admin.component';
     BuildingsComponent,
     InterconnectsComponent,
     CameraGuideComponent,
-    AdminComponent
+    AdminComponent,
+    PSpaceComponent
   ],
   imports: [
     BrowserModule,
