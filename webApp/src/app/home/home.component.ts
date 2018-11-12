@@ -12,12 +12,16 @@ export class HomeComponent implements OnInit {
   plots = [];
   destinations = [];
   parkingdata;
+  groups;
 
   ngOnInit() {
       // this.plots.push({'name': 'PLot 54D', 'lat': 25.36, 'long': 66.321, 'capacity': 12, 'freespace': 5});
       // this.plots.push({'name': 'PLot 54D', 'lat': 25.36, 'long': 66.321, 'capacity': 12, 'freespace': 5});
       // this.destinations.push({'id': 6, 'name': 'mayank'});
       // this.destinations.push({'id': 5, 'name': 'adit'});
+      this.backend.getgroups().subscribe((data)=>{
+        this.groups = data;
+      })
       var script = document.createElement('script');
       document.body.appendChild(script)
       // script.onload = this.onMathJaxLoaded.bind(this);
@@ -27,7 +31,8 @@ export class HomeComponent implements OnInit {
 
   getparking(){
       var dest_id = (<HTMLInputElement>document.getElementById('destination_select')).value;
-      this.backend.getparkingspace(dest_id).subscribe((data) =>{
+      var group_id = (<HTMLInputElement>document.getElementById('group_select')).value;
+      this.backend.getparkingspace(dest_id, group_id).subscribe((data) =>{
         this.parkingdata = data;
       })
       console.log(dest_id);

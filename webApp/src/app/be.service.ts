@@ -34,6 +34,7 @@ export class BEService {
   postpspacenameURL = this.baseURL + 'post/pspaces';
 
   getparkingspaceURL = this.baseURL + 'get/parkingspace';
+  getgroupsURL = this.baseURL + 'get/groups';
 
   postlots(lots){
       return this.http.post(this.postplotsURL, lots, {responseType: 'text'});
@@ -90,7 +91,11 @@ export class BEService {
     return this.http.post(this.postpspacenameURL, pspaces, {responseType: 'text'});
   }
 
-  getparkingspace(dest_id){
-    return this.http.get(this.getparkingspaceURL + '/' + dest_id, {responseType: 'json'});
+  getparkingspace(dest_id, group_id){
+    return this.http.get(this.getparkingspaceURL + '/' + dest_id + '/' + group_id, {responseType: 'json'});
+  }
+
+  getgroups(){
+    return this.http.get(this.getgroupsURL, {responseType: 'json'});
   }
 }

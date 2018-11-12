@@ -40,6 +40,9 @@
                     Select destination: <select id="destination_select">
                         <option *ngFor="let dest of destinations" [value]="dest.id">{{dest.name}}</option>
                     </select>
+                    Select type of parking space: <select id="group_select">
+                        <option *ngFor="let group of groups" [value]="group.id">{{group.name}}</option>
+                    </select>
                     <!-- <input type="number" id="blat" value="37.3652" style="display: none;">
                     <input type="number" id="blng" value="37.3652" style="display: none;">
                     <input type="number" id="elat" value="37.6652" style="display: none;">
