@@ -10,17 +10,14 @@ import {BEService} from '../be.service';
 export class BuildingsComponent implements OnInit {
 
   building_name = "";
-  buildings = [];
+  buildings = [{'name': '', 'latitude': 0, 'longitude': 0}];
   constructor(private backend:BEService, private router:Router) { }
 
   ngOnInit() {
   }
 
-  add_building(){
-      if(this.building_name!=""){
-          this.buildings.push(this.building_name);
-          this.building_name = "";
-      }
+  addrow(){
+      this.buildings.push({'name': '', 'latitude': 0, 'longitude': 0})
   }
 
   finish(){
