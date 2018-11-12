@@ -1,5 +1,5 @@
 import sqlite3
-
+import funcs as f
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 
@@ -99,6 +99,7 @@ def post_pspaces():
 
 @app.route('/get/probe-ids-init/<p_lot_id>', methods=['GET'])
 def probe_init_ids(p_lot_id):
+    p_lot_id = int(p_lot_id)
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
     rows = c.execute('''SELECT id, name FROM PSpace
@@ -108,6 +109,7 @@ def probe_init_ids(p_lot_id):
 
 @app.route('/get/probe-image-init/<p_lot_id>', methods=['GET'])
 def probe_init_image(p_lot_id):
+    p_lot_id = int(p_lot_id)
     conn = sqlite3.connect('data.db')
     marked_blob = f.init_prob(conn, p_lot_id)
     response = make_response(marked_blob)

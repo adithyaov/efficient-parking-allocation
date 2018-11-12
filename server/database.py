@@ -48,5 +48,5 @@ with open('./sql/mock.sql','r') as f:
 with sqlite3.connect('data.db') as conn:
     c = conn.cursor()
     c.executescript(sql_table_creation)
-    c.executescript(sql_mock)
+    # c.executescript(sql_mock)
     conn.commit()

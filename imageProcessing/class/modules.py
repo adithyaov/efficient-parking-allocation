@@ -1,26 +1,57 @@
-import sys
-sys.path.insert(0, '3rd_party/models/tutorials/image/imagenet')
-import classify_image as ci
+# import sys
+# sys.path.insert(0, '3rd_party/models/tutorials/image/imagenet')
+# import classify_image as ci
 import argparse
-
+import time
 import numpy as np
 import cv_func
 import cv2
 
+from imutils.video import VideoStream as VS
+
+def get_feed_points(p_lot_id):
+	live_stream = VS(src=p_lot_id).start()
+	time.sleep(2.0)
+
+	image = live_stream.read()
+	cv2.imwrite('/home/saki/ISH-2018/imageProcessing/refs/'+str(p_lot_id)+'ref.jpg', image)
+	im, (im2, contours, hierarchy) = cv_func.detect_contour(image, 70)
+	cnt, x_y, r = cv_func.detect_hierarchy(contours, hierarchy, 0)
+
+	# cv2.drawContours(im, cnt, -1, (0,255,0), 3)
+	# cv2.imshow("detected_contour", im)
+	# cv2.waitKey(0)
+
+	# cv2.destroyAllWindows()
+	live_stream.stop()
+
+	return x_y
+
+def mark_points(p_lot_id, rows):
+	ref = cv2.imread('/home/saki/ISH-2018/imageProcessing/refs/'+str(p_lot_id)+'ref.jpg')
+	img = ref.copy()
+
+	font = cv2.FONT_HERSHEY_SIMPLEX
+
+	for x, y, pid in rows:
+		cv2.putText(img,str(pid),(int(x),int(y)), int(font), 1,(0,0,255),2,cv2.LINE_AA)
+
+	cv2.imwrite('/home/saki/ISH-2018/imageProcessing/refs/tmp.jpg', img)
+	f = open('/home/saki/ISH-2018/imageProcessing/refs/tmp.jpg', 'rb')
+
+	return f.read()
+
+
 def mod0_ps_bond(image, thres, level):
 	park_image = image.copy()
+	
 	im, (im2, contours, hierarchy) = cv_func.detect_contour(park_image, thres)
 	cnt, x_y, r = cv_func.detect_hierarchy(contours, hierarchy, level)
+	
+	cv2.drawContours(im, cnt, -1, (0,255,0), 3)
 
-	cv_func.display_contour(im, cnt, "detected_parking")
-	cv2.waitKey(0)
-	cv2.destroyAllWindows()
+	return im
 
-	x_y_list = []
-	for i in cnt[0]:
-		x_y_list.append([i[0][0], i[0][1]])
-
-	return x_y_list
 
 def mod1_ps_init(image, thres, level):
 	park_image = image.copy()
@@ -61,23 +92,23 @@ def mod2_ps_detect(image, thres, x_y, r, level):
 		
 	return state
 
-def arg_parse(file):
-	parser = argparse.ArgumentParser()
-	parser.add_argument('--model_dir', type=str, default='/tmp/imagenet', help="")
-	parser.add_argument('--image_file', type=str, default=file, help="")
-	parser.add_argument('--num_top_predictions', type=int, default=1, help="")
+# def arg_parse(file):
+# 	parser = argparse.ArgumentParser()
+# 	parser.add_argument('--model_dir', type=str, default='/tmp/imagenet', help="")
+# 	parser.add_argument('--image_file', type=str, default=file, help="")
+# 	parser.add_argument('--num_top_predictions', type=int, default=1, help="")
 
-	return parser.parse_known_args()	
+# 	return parser.parse_known_args()	
 
-def mod3_ps_object(image, thres, x_y, r, level):
-	park_image = image.copy()
-	cropped_images = cv_func.crop_image(park_image, x_y, 2*r)
+# def mod3_ps_object(image, thres, x_y, r, level):
+# 	park_image = image.copy()
+# 	cropped_images = cv_func.crop_image(park_image, x_y, 2*r)
 
-	for x in cropped_images:
-		cv2.imwrite('temp.jpg', x)
-		ci.FLAGS, ci.unparsed = arg_parse('temp.jpg')
-		name, score = ci.main(ci.FLAGS)
-		print name, score
+# 	for x in cropped_images:
+# 		cv2.imwrite('temp.jpg', x)
+# 		ci.FLAGS, ci.unparsed = arg_parse('temp.jpg')
+# 		name, score = ci.main(ci.FLAGS)
+# 		print name, score
 
 def mod4_psrb_ref(ref, out, x_y, r, thres):
 	ref_img = ref.copy()

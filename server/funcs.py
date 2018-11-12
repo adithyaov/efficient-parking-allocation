@@ -1,3 +1,7 @@
+import sys
+sys.path.insert(0, '../imageProcessing/class')
+from modules import get_feed_points, mark_points
+
 def update_current_capacity(conn):
     c = conn.cursor()
     rows = c.execute('''SELECT P.p_lot_id AS lid, P.group_id AS gid, COUNT(*) AS c FROM Allocations as A 
@@ -85,8 +89,5 @@ def init_prob(conn, p_lot_id):
                                 .format(lid=p_lot_id)).fetchall()
     marked_blob = mark_points(p_lot_id, rows) #return blob
     return marked_blob
-    #response = make_response(marked_blob)
-    #response.headers.set('Content-Type', 'image/jpeg')
-    #return response
 
  

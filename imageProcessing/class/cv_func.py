@@ -39,3 +39,4 @@ def crop_image(img, x_y, cr):
 def display_contour(img, contours, text):
 	cv2.drawContours(img, contours, -1, (0,255,0), 3)
 	cv2.imshow(text, img)
+
