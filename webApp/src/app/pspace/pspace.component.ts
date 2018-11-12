@@ -12,7 +12,7 @@ export class PSpaceComponent implements OnInit {
 
   constructor(private backend: BEService, private router:Router, private sanitizer: DomSanitizer) { }
   lots;
-  pspaces;
+  pspaces: any[];
   ImageLink;
   groups;
 
@@ -33,9 +33,9 @@ export class PSpaceComponent implements OnInit {
                 // console.log(data)
               this.ImageLink = this.sanitizer.bypassSecurityTrustUrl(
                   urlCreator.createObjectURL(img));
-          this.backend.getpspacenames(id).subscribe((data) => {
+          this.backend.getpspacenames(id).subscribe((data: any[]) => {
               this.pspaces = data;
-                
+              this.pspaces.forEach((p)=>{p.group = 0});
               document.getElementById("pspace-div").style.display = 'inline-block';
           })
       })
