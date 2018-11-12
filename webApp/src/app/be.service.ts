@@ -26,6 +26,7 @@ export class BEService {
   postdefineplotsURL = this.baseURL + 'post/lots';
   postbuildingsURL = this.baseURL + 'post/destinations';
   getbuildingsURL = this.baseURL + 'get/destinations';
+  getinterconnectsURL = this.baseURL + 'get/interconnects';
   postinterconnectsURL = this.baseURL + 'post/interconnects';
   cameraguideURL = this.baseURL + 'camera-guide';
   getpspacenameURL = this.baseURL + 'get/pspaces';
@@ -57,6 +58,10 @@ export class BEService {
 
   getbuildings(){
     return this.http.get(this.getbuildingsURL, {responseType: 'json'});
+  }
+
+  getinterconnects(){
+    return this.http.get(this.getinterconnectsURL, {responseType: 'json'});
   }
 
   postinterconnects(interconnects){

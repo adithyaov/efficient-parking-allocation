@@ -26,6 +26,11 @@ export class InterconnectsComponent implements OnInit {
                   })
                   this.interconnects[b.id] = s;
               })
+              this.backend.getinterconnects().subscribe((idata: any[])=>{
+                idata.forEach((i) =>{
+                  this.interconnects[i['destination_id']][i['p_lot_id']] = i['distance'];
+                })
+              })
           })
       }) 
   }
