@@ -34,7 +34,7 @@ def get_lots():
     return jsonify(rows)
 
 @app.route('/get/destinations')
-def get_lots():
+def get_destinations():
     c = conn.cursor()
     rows = c.execute("SELECT id, name FROM Destinations").fetchall()
     return jsonify(rows)
@@ -54,7 +54,7 @@ def post_interconnects():
 
 
 @app.route('/get/pspaces')
-def post_pspaces():
+def get_pspaces():
     c = conn.cursor()
     rows = c.execute("SELECT id, name FROM PSpace").fetchall()
     return jsonify(rows)
@@ -77,3 +77,4 @@ def post_pspaces():
     conn.commit()
     return "Ta-da!"
 
+app.run(host='0.0.0.0', port=8080)
