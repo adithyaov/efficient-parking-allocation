@@ -1,10 +1,10 @@
-CREATE TABLE PLot (id INT PRIMARY KEY, 
+CREATE TABLE PLot (id INT PRIMARY KEY AUTOINCREMENT, 
 	name TEXT, 
 	lat REAL, 
 	long REAL, 
 	capacity INT);
 
-CREATE TABLE Destinations (id INT PRIMARY KEY, 
+CREATE TABLE Destinations (id INT PRIMARY KEY AUTOINCREMENT,
 	name TEXT, 
 	lat REAL, 
 	long REAL);
@@ -14,12 +14,12 @@ CREATE TABLE DistanceGraph (p_lot_id INT,
 	distance INT,
 	CONSTRAINT UNQPD UNIQUE (p_lot_id, destination_id));
 
-CREATE TABLE PSpace (id INT PRIMARY KEY, 
+CREATE TABLE PSpace (id INT PRIMARY KEY AUTOINCREMENT, 
 	name TEXT, 
 	p_lot_id INT, 
 	group_id INT);
 
-CREATE TABLE PGroup (id INT PRIMARY KEY, 
+CREATE TABLE PGroup (id INT PRIMARY KEY AUTOINCREMENT, 
 	name TEXT);
 
 CREATE TABLE TempReserves (p_space_id INT, 
