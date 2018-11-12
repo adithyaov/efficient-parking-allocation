@@ -17,6 +17,7 @@ export class BEService {
   constructor(private http:HttpClient) { }
 
   baseURL = "http://localhost:8000/";
+  // baseURL = "/";
 
   plotsURL = this.baseURL + 'plots/';
   defineplotsURL = this.baseURL + 'define-plots/';
@@ -24,7 +25,7 @@ export class BEService {
   interconnectsURL = this.baseURL + 'interconnects/';
 
   postlots(lots){
-      return this.http.post(this.plotsURL, lots, {responseType: 'text'});
+      return this.http.post(this.plotsURL, fdata, {responseType: 'text'});
   }
 
   getlots(){
@@ -32,7 +33,13 @@ export class BEService {
   }
 
   post_define_lots(lots){
-      return this.http.post(this.defineplotsURL, { lots: lots}, {responseType: 'text'});
+    var fdata = new FormData();
+    var len = lots.length;
+    for(var i = 0; i < len; i++){
+      fdata.append('image' + i, lots[i].image);
+    }
+    fdata.append('textdata', JSON.stringify(lots));
+      return this.http.post(this.defineplotsURL, fdata, {responseType: 'text'});
   }
 
   postbuildings(buildings){

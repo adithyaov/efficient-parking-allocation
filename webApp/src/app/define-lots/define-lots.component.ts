@@ -11,19 +11,38 @@ import {BEService} from '../be.service';
 export class DefineLotsComponent implements OnInit {
 
   constructor(private backend: BEService, private router:Router) { }
-  lots;
+  plots;
+  sl = 0;
   baseURL = this.backend.baseURL;
 
   ngOnInit() {
-      this.backend.getlots().subscribe((data)=> {
-          this.lots = data;
-      })
+      this.plots = [{'sl': 0,'name': 'test', 'latitude': 25.3, 'longitude': 63.3, 'capacity': 23, 'image': null, 'b64': ''}];
   }
 
+  addrow(){
+    this.sl = this.sl + 1;
+    this.plots.push({'sl': this.sl,'name': '', 'latitude': 0, 'longitude': 0, 'capacity': 0, 'image': null, 'b64': ''});
+  }
+
+  onFileChanged(event, sl) {
+    this.plots[sl].image = event.target.files[0];
+    // var reader = new FileReader();
+    // reader.onload =this._handleReaderLoaded.bind(this, sl);
+    // reader.readAsBinaryString(event.target.files[0]);
+  }
+  _handleReaderLoaded(readerEvt, sl) {
+       var binaryString = readerEvt.target.result;
+              this.plots.b64= btoa(binaryString);
+              console.log(btoa(binaryString));
+      }
+
   finish(){
-      this.backend.post_define_lots(this.lots).subscribe((data) =>{
+    // var form = document.getElementById("plotform");
+    // var fdata = new FormData(form);
+    console.log(this.plots);
+      this.backend.post_define_lots(this.plots).subscribe((data) =>{
           console.log(data);
-          this.router.navigateByUrl('/buildings');
+          // this.router.navigateByUrl('/buildings');
       })
   }
 

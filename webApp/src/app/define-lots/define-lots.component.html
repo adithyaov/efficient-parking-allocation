@@ -2,15 +2,27 @@
     <div class="row">
         <div class="col-sm-12">
             <h3>Define the parking lots below</h3>
-            <form action="{{baseURL}}define-lots/" method="POST" enctype="multipart/form-data">
-                <div class="alert alert-dark" *ngFor="let lot of lots">
-                    Id: {{lot.lot_id}}<br>
-                    Label: {{lot.label}}<br>
-                    Capacity: <input type="text" [(ngModel)]="lot.capacity" name="{{lot_id}}_capacity"><br>
-                    <!-- Upload an areial view: <input type="file" name="{{lot_id}}_image"> -->
-                </div>
-                <button class="btn btn-success" (click)="finish()" >Next</button>
-            </form>
+            <form id="plotform" enctype="multipart/form-data" method="POST" action="http://127.0.0.1:8000/buildings/"></form>
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Capacity</th>
+                        <th>Image</th>
+                    </tr>
+                    <tr *ngFor="let plot of plots">
+                        <td><input type="text" name="name[]" [(ngModel)]="plot.name" placeholder="Name" form="plotform"></td>
+                        <td><input type="number" name="lat[]" [(ngModel)]="plot.latitude" form="plotform"></td>
+                        <td><input type="number" name="long[]" [(ngModel)]="plot.longitude" form="plotform"></td>
+                        <td><input type="number" name="capacity[]" [(ngModel)]="plot.capacity" form="plotform"></td>
+                        <td><input type="file" name="image[]" (change)="onFileChanged($event, plot.sl)" form="plotform"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success" type="button" (click)="addrow()" >+ Add a parking lot</button>
+            <button style="margin-left: 20px" class="btn btn-success" type="button" (click)="finish()" >Next</button>
         </div>
     </div>
 </div>
