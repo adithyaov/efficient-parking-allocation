@@ -1,3 +1,8 @@
+import sys
+sys.path.insert(0, '3rd_party/models/tutorials/image/imagenet')
+import classify_image as ci
+import argparse
+
 import numpy as np
 import cv_func
 import cv2
@@ -51,3 +56,24 @@ def mod2_ps_detect(image, thres, x_y, r, level):
 	cv2.destroyAllWindows()			
 		
 	return state
+
+def arg_parse(file):
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--model_dir', type=str, default='/tmp/imagenet', help="")
+	parser.add_argument('--image_file', type=str, default=file, help="")
+	parser.add_argument('--num_top_predictions', type=int, default=1, help="")
+
+	return parser.parse_known_args()	
+
+def mod3_ps_object(image, thres, x_y, r, level):
+	park_image = image.copy()
+	cropped_images = cv_func.crop_image(park_image, x_y, 2*r)
+
+	# for x in cropped_images:
+	# 	im = x.copy()
+	# 	ci.run_inference_on_image(im)
+
+	ci.FLAGS, ci.unparsed = arg_parse('2.jpg')
+	name, score = ci.main(ci.FLAGS)
+
+	print name, score
