@@ -33,6 +33,10 @@ export class BEService {
   getpspaceimageURL = this.baseURL + 'get/probe-image-init'
   postpspacenameURL = this.baseURL + 'post/pspaces';
 
+  getparkingspaceURL = this.baseURL + 'get/parkingspace';
+  getgroupsURL = this.baseURL + 'get/groups';
+  getparkinglots_pollURL = this.baseURL + '/get/parkinglots-poll';
+
   postlots(lots){
       return this.http.post(this.postplotsURL, lots, {responseType: 'text'});
   }
@@ -86,5 +90,17 @@ export class BEService {
 
   postpspacenames(pspaces){
     return this.http.post(this.postpspacenameURL, pspaces, {responseType: 'text'});
+  }
+
+  getparkingspace(dest_id, group_id){
+    return this.http.get(this.getparkingspaceURL + '/' + dest_id + '/' + group_id, {responseType: 'json'});
+  }
+
+  getgroups(){
+    return this.http.get(this.getgroupsURL, {responseType: 'json'});
+  }
+
+  getparkinglots_poll(){
+    return this.http.get(this.getparkinglots_pollURL, {responseType: 'json'});
   }
 }

@@ -39,7 +39,7 @@ export class InterconnectsComponent implements OnInit {
       console.log(this.interconnects);
       this.backend.postinterconnects(this.interconnects).subscribe((data:string) => {
           console.log(data);
-          // this.router.navigateByUrl('/define-lots');
+          this.router.navigateByUrl('/define-pspace');
       });
   }
 }

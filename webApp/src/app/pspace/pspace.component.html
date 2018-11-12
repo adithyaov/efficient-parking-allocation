@@ -5,28 +5,31 @@
             <p>Please enter labels for parking spaces marked on the image. You may select the parking lot from below.</p>
             <ul>
                 <li *ngFor="let lot of lots" (click)="setlabel(lot.id)">
-                    <a>{{lot.name}}</a>
+                    <a style="cursor: pointer;">{{lot.name}}</a>
                 </li>
             </ul>
             <div style="display: none;" id="pspace-div">
-                <div style="max-width: 40vw; display: inline-block; margin: 5px;">
-                    <img [src]="ImageLink" id="plotimage" style="display: inline-block;vertical-align: top">
+                <div style="margin: 5px;">
+                    <img [src]="ImageLink" id="plotimage" style="">
                 </div>
-                <div style="max-width: 40vw; display: inline-block; margin: 5px;">
-                    <table class="table table-striped" style="display: inline-block; width: auto; vertical-align: top">
+                <div style="margin: 5px;">
+                    <table class="table table-striped" style="">
                         <tbody>
                             <tr>
                                 <th>Id</th>
                                 <th>Label</th>
+                                <th>Group</th>
                             </tr>
                             <tr *ngFor="let pspace of pspaces">
                                 <td>{{pspace.id}}</td>
                                 <td><input type="text" [(ngModel)]="pspace.name"></td>
+                                <td><input type="text" [(ngModel)]="pspace.group"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div><button style="margin-left: 20px" class="btn btn-success" type="button" (click)="finish()" >Update</button></div>
+                <div><button style="margin-left: 20px" class="btn btn-success" type="button" (click)="finish_setup()" >Finish</button></div>
             </div>
         </div>
     </div>

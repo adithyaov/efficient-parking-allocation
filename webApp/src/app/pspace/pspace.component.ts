@@ -43,4 +43,8 @@ export class PSpaceComponent implements OnInit {
       });
   }
 
+  finish_setup(){
+      this.router.navigateByUrl('/');
+  }
+
 }
