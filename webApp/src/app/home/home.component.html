@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" style="padding: 20px;">
+            <h1>Parking Pal</h1>
+            <p style="color: gray">Intelligent parking solutions</p>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Parking Lots</h3>
+                    <!-- <div class="col-sm-4" > -->
+                        <div class="card-columns">
+                            <div class="card" *ngFor="let plot of plots">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{plot.name}}</h4>
+                                    <div class="card-text">
+                                    <table class="table table-sm table-borderless" style="display: inline-block;">
+                                        <tbody>
+                                            <tr>
+                                                <td>Location:</td>
+                                                <td>{{plot.lat}}, {{plot.long}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Capacity:</td>
+                                                <td>{{plot.capacity}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Free spaces:</td>
+                                                <td>{{plot.freespace}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                </div>
+                <div class="col-sm-6">
+                    <h3>Request parking</h3>
+                    Select destination: <select id="destination_select">
+                        <option *ngFor="let dest of destinations" [value]="dest.id">{{dest.name}}</option>
+                    </select>
+                    <button class="btn btn-success" (click)="getparking()" >Go</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

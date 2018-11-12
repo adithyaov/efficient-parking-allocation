@@ -7,8 +7,10 @@ import { InterconnectsComponent } from './interconnects/interconnects.component'
 import { CameraGuideComponent } from './camera-guide/camera-guide.component';
 import { AdminComponent } from './admin/admin.component';
 import { PSpaceComponent } from './pspace/pspace.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
+    { path: '', component: HomeComponent},
     { path: 'get-lots', component: GetLotsComponent },
     { path: 'define-lots', component: DefineLotsComponent },
     { path: 'buildings', component: BuildingsComponent },
