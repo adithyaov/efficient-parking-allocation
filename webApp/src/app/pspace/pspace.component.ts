@@ -28,10 +28,10 @@ export class PSpaceComponent implements OnInit {
           this.pspaces = data;
           this.backend.getpspaceimage(id).subscribe((img) => {
                 let urlCreator = window.URL;
-                console.log(data)
+                // console.log(data)
               this.ImageLink = this.sanitizer.bypassSecurityTrustUrl(
                   urlCreator.createObjectURL(img));
-              document.getElementById("pspace-div").style.display = 'block';
+              document.getElementById("pspace-div").style.display = 'inline-block';
           })
       })
   }

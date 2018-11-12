@@ -22,9 +22,9 @@ export class InterconnectsComponent implements OnInit {
               this.buildings.forEach((b) => {
                   var s = {};
                   this.lots.forEach((l) =>{
-                      s[l.lot_id] = 0;
+                      s[l.id] = 0;
                   })
-                  this.interconnects[b.building_id] = s;
+                  this.interconnects[b.id] = s;
               })
           })
       }) 
