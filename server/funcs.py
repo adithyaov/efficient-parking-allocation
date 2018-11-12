@@ -24,6 +24,8 @@ def get_nearest_spot(conn, did, gid):
                                 AND destination_id = {did}
                             ORDER BY D.distance'''\
                                 .format(did=did, gid=gid)).fetchall()
+    if len(rows) == 0:
+        return None
     row = rows[0]
     lid = row[0]
 
@@ -48,7 +50,35 @@ def get_nearest_spot(conn, did, gid):
                         .format(pid=pid, tt=tt))
     
     print lid, pid, pname
+    rows = c.execute("SELECT * FROM PLot WHERE id={id}"\
+                        .format(id=lid)).fetchall()
+    l = rows[0]
+
+    rows = c.execute("SELECT * FROM Destinations WHERE id={id}"\
+                        .format(id=did)).fetchall()
+    d = rows[0]
+
+    return_dict = {
+        'parkingspace': {
+            'id': pid,
+            'name': pname
+        },
+        'dest': {
+            'id': d[0],
+            'name': d[1],
+            'lat': d[2],
+            'long': d[3]
+        },
+        'p_lot': {
+            'id': l[0],
+            'name': l[1],
+            'lat': l[2],
+            'long': l[3],
+            'capacity': l[4]
+        }
+    }
     conn.commit()
+    return return_dict
 
 def temp_time(did):
     return 4
@@ -81,7 +111,7 @@ def init_prob(conn, p_lot_id):
     points = get_feed_points(p_lot_id) # Change this!
     c = conn.cursor()
     for point in points:
-        c.execute("INSERT INTO PSpace (p_lot_id, x, y) VALUES ({lid}, {x}, {y})"\
+        c.execute("INSERT OR IGNORE INTO PSpace (p_lot_id, x, y, group_id) VALUES ({lid}, {x}, {y}, 0)"\
                         .format(lid=p_lot_id, x=point[0], y=point[1]))
     conn.commit()
     rows = c.execute('''SELECT x, y, id FROM PSpace

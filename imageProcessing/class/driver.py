@@ -3,11 +3,14 @@ import time
 import modules
 import cv_func
 
-modules.get_feed_points(1)
+x_y = modules.get_feed_points(1)
 
-# rows = [[369, 319, 1], [488, 248, 2], [415, 155, 3], [510, 105, 4], [374, 63, 5]]
+time.sleep(2.0)
 
-modules.mark_points(1, rows)
+norm = modules.some_func(1, x_y)
+
+print norm
+
 # image = cv2.imread('park_space_uc.jpg')
 # x_y_bond = modules.mod0_ps_bond(image, 225, 1)
 # x_y_plot, r = modules.mod1_ps_init(image, 225, 2) #get_feed_points

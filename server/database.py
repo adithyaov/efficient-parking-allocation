@@ -50,3 +50,11 @@ with sqlite3.connect('data.db') as conn:
     c.executescript(sql_table_creation)
     # c.executescript(sql_mock)
     conn.commit()
+
+c = conn.cursor()
+c.execute('''INSERT INTO PGroup (id, name) 
+                VALUES 
+                    (0, 'General'),
+                    (1, 'Senior'),
+                    (2, 'Handicapped')''')
+conn.commit()

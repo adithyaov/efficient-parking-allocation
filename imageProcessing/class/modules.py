@@ -1,7 +1,10 @@
 # import sys
 # sys.path.insert(0, '3rd_party/models/tutorials/image/imagenet')
 # import classify_image as ci
+
+from skimage.measure import compare_ssim
 import argparse
+import math
 import time
 import numpy as np
 import cv_func
@@ -40,6 +43,35 @@ def mark_points(p_lot_id, rows):
 	f = open('/home/saki/ISH-2018/imageProcessing/refs/tmp.jpg', 'rb')
 
 	return f.read()
+
+def some_func(p_lot_id, x_y):
+	live_stream = VS(src=p_lot_id).start()
+	time.sleep(2.0)
+
+	cr = 18
+
+	img = live_stream.read()
+	ref = cv2.imread('/home/saki/ISH-2018/imageProcessing/refs/'+str(p_lot_id)+'ref.jpg')
+
+	img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+	ref = cv2.cvtColor(ref, cv2.COLOR_BGR2GRAY)
+
+	ref_crop = cv_func.crop_image(ref, x_y, cr)
+	img_crop = cv_func.crop_image(img, x_y, cr)
+
+	norm = []
+
+	for x in range(len(ref_crop)):
+		(score, diff) = compare_ssim(ref_crop[x], img_crop[x], full=True)
+		diff = (diff * 255).astype("uint8")
+		cv2.imshow("diff", diff)
+		cv2.waitKey(0)
+		norm.append(score)
+	
+	cv2.destroyAllWindows()
+	live_stream.stop()
+
+	return norm
 
 
 def mod0_ps_bond(image, thres, level):
