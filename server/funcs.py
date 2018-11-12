@@ -73,5 +73,20 @@ def init_allocations(conn):
     for row in rows:
         modify_allocation(conn, row[0], 0)
     
-    
-    
+def init_prob(conn, p_lot_id):
+    points = get_feed_points(p_lot_id) # Change this!
+    c = conn.cursor()
+    for point in points:
+        c.execute("INSERT INTO PSpace (p_lot_id, x, y) VALUES ({lid}, {x}, {y})"\
+                        .format(lid=p_lot_id, x=point[0], y=point[1]))
+    conn.commit()
+    rows = c.execute('''SELECT x, y, id FROM PSpace
+                            WHERE p_lot_id={lid}'''\
+                                .format(lid=p_lot_id)).fetchall()
+    marked_blob = mark_points(p_lot_id, rows) #return blob
+    return marked_blob
+    #response = make_response(marked_blob)
+    #response.headers.set('Content-Type', 'image/jpeg')
+    #return response
+
+ 

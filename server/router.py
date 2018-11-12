@@ -69,7 +69,7 @@ def get_interconnects():
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
     rows = c.execute("SELECT p_lot_id, destination_id, distance FROM DistanceGraph").fetchall()
-    return jsonify(map(lambda x: {"p_lot_id": x[0], "destination_id": x[1], "distance": x[2]}, rows)) 
+    jsonify(map(lambda x: {"p_lot_id": x[0], "destination_id": x[1], "distance": x[2]})) 
 
 @app.route('/get/pspaces', methods=['GET'])
 def get_pspaces():
@@ -96,5 +96,25 @@ def post_pspaces():
                             .format(id=x['id'], name=x['name']))
     conn.commit()
     return "Ta-da!"
+
+@app.route('/get/probe-ids-init/<p_lot_id>', methods=['GET'])
+def probe_init_ids(p_lot_id):
+    conn = sqlite3.connect('data.db')
+    c = conn.cursor()
+    rows = c.execute('''SELECT id, name FROM PSpace
+                            WHERE p_lot_id={lid}'''\
+                                .format(lid=p_lot_id)).fetchall()
+    return jsonify(map(lambda x: {"id": x[0], "name": x[1]}, rows))
+
+@app.route('/get/probe-image-init/<p_lot_id>', methods=['GET'])
+def probe_init_image(p_lot_id):
+    conn = sqlite3.connect('data.db')
+    marked_blob = f.init_prob(conn, p_lot_id)
+    response = make_response(marked_blob)
+    response.headers.set('Content-Type', 'image/jpeg')
+    return response
+
+
+
 
 app.run(host='0.0.0.0', port=8080)
