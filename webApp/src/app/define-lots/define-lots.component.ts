@@ -16,12 +16,12 @@ export class DefineLotsComponent implements OnInit {
   baseURL = this.backend.baseURL;
 
   ngOnInit() {
-      this.plots = [{'sl': 0,'name': 'test', 'latitude': 25.3, 'longitude': 63.3, 'capacity': 23, 'image': null, 'b64': ''}];
+      this.plots = [{'sl': 0,'name': 'test', 'latitude': 25.3, 'longitude': 63.3, 'capacity': 23, 'image': null}];
   }
 
   addrow(){
     this.sl = this.sl + 1;
-    this.plots.push({'sl': this.sl,'name': '', 'latitude': 0, 'longitude': 0, 'capacity': 0, 'image': null, 'b64': ''});
+    this.plots.push({'sl': this.sl,'name': '', 'latitude': 0, 'longitude': 0, 'capacity': 0, 'image': null});
   }
 
   onFileChanged(event, sl) {
@@ -42,7 +42,7 @@ export class DefineLotsComponent implements OnInit {
     console.log(this.plots);
       this.backend.post_define_lots(this.plots).subscribe((data) =>{
           console.log(data);
-          // this.router.navigateByUrl('/buildings');
+          this.router.navigateByUrl('/buildings');
       })
   }
 

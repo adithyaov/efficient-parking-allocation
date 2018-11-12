@@ -25,7 +25,7 @@ export class BEService {
   interconnectsURL = this.baseURL + 'interconnects/';
 
   postlots(lots){
-      return this.http.post(this.plotsURL, fdata, {responseType: 'text'});
+      return this.http.post(this.plotsURL, lots, {responseType: 'text'});
   }
 
   getlots(){
@@ -33,13 +33,14 @@ export class BEService {
   }
 
   post_define_lots(lots){
-    var fdata = new FormData();
-    var len = lots.length;
-    for(var i = 0; i < len; i++){
-      fdata.append('image' + i, lots[i].image);
-    }
-    fdata.append('textdata', JSON.stringify(lots));
-      return this.http.post(this.defineplotsURL, fdata, {responseType: 'text'});
+    // var fdata = new FormData();
+    // var len = lots.length;
+    // for(var i = 0; i < len; i++){
+    //   fdata.append('image' + i, lots[i].image);
+    // }
+    // fdata.append('textdata', JSON.stringify(lots));
+      // return this.http.post(this.defineplotsURL, fdata, {responseType: 'text'});
+      return this.http.post(this.defineplotsURL, lots, {responseType: 'text'});
   }
 
   postbuildings(buildings){
