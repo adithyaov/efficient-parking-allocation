@@ -17,25 +17,27 @@ export class BEService {
 
   constructor(private http:HttpClient) { }
 
-  baseURL = "http://localhost:8000/";
+  baseURL = "http://localhost:8080/";
   // baseURL = "/";
 
-  getadminURL = this.baseURL + 'get/setup/';
-  plotsURL = this.baseURL + 'plots/';
-  defineplotsURL = this.baseURL + 'define-plots/';
-  buildingsURL = this.baseURL + 'buildings/';
-  interconnectsURL = this.baseURL + 'interconnects/';
-  cameraguideURL = this.baseURL + 'camera-guide/';
+  getadminURL = this.baseURL + 'get/setup';
+  getplotsURL = this.baseURL + 'get/lots';
+  postplotsURL = this.baseURL + 'post/lots';
+  postdefineplotsURL = this.baseURL + 'post/lots';
+  postbuildingsURL = this.baseURL + 'post/destinations';
+  getbuildingsURL = this.baseURL + 'get/destinations';
+  postinterconnectsURL = this.baseURL + 'post/interconnects';
+  cameraguideURL = this.baseURL + 'camera-guide';
   getpspacenameURL = this.baseURL + 'get/pspaces';
   getpspaceimageURL = this.baseURL + 'get/pspaceimage'
   postpspacenameURL = this.baseURL + 'post/pspaces';
 
   postlots(lots){
-      return this.http.post(this.plotsURL, lots, {responseType: 'text'});
+      return this.http.post(this.postplotsURL, lots, {responseType: 'text'});
   }
 
   getlots(){
-      return this.http.get(this.plotsURL, {responseType: 'json'});
+      return this.http.get(this.getplotsURL, {responseType: 'json'});
   }
 
   post_define_lots(lots){
@@ -46,19 +48,19 @@ export class BEService {
     // }
     // fdata.append('textdata', JSON.stringify(lots));
       // return this.http.post(this.defineplotsURL, fdata, {responseType: 'text'});
-      return this.http.post(this.defineplotsURL, lots, {responseType: 'text'});
+      return this.http.post(this.postdefineplotsURL, lots, {responseType: 'text'});
   }
 
   postbuildings(buildings){
-      return this.http.post(this.buildingsURL, buildings, {responseType: 'text'});
+      return this.http.post(this.postbuildingsURL, buildings, {responseType: 'text'});
   }
 
   getbuildings(){
-    return this.http.get(this.buildingsURL, {responseType: 'json'});
+    return this.http.get(this.getbuildingsURL, {responseType: 'json'});
   }
 
   postinterconnects(interconnects){
-    return this.http.post(this.interconnectsURL, interconnects, {responseType: 'text'});
+    return this.http.post(this.postinterconnectsURL, interconnects, {responseType: 'text'});
   }
 
   getcameraguide(image, scale){

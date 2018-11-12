@@ -3,8 +3,8 @@
         <div class="col-sm-12" style="padding: 20px;">
             <h3>Interconnect distances</h3>
             <p>Please enter the distances between each parking lot and the buildings.</p>
-            <div class="card-deck" *ngFor="let building of buildings" style="margin-bottom: 10px;">
-                <div class="card bg-light" *ngFor="let lot of lots" style="padding: 5px;">{{building.name}} <-> {{lot.name}}    <input type="number" [(ngModel)]="interconnects[building.id][lot.id]" style="display: inline-block;"></div>
+            <div class="card-columns" *ngFor="let building of buildings" style="margin-bottom: 10px;">
+                <div class="card bg-light" *ngFor="let lot of lots" style="padding: 5px;">{{building.name}} <-> {{lot.name}}    <input type="number" [(ngModel)]="interconnects[building.id][lot.id]" style=""></div>
             </div>
             <button class="btn btn-success" (click)="finish()" >Next</button>
         </div>

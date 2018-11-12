@@ -11,14 +11,14 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 export class PSpaceComponent implements OnInit {
 
   constructor(private backend: BEService, private router:Router, private sanitizer: DomSanitizer) { }
-  lots = [{'name': 'asd', 'id':2}];
+  lots;
   pspaces;
   ImageLink;
 
   ngOnInit() {
-      // this.backend.getlots().subscribe((data) => {
-      //     this.lots = data;
-      // });
+      this.backend.getlots().subscribe((data) => {
+          this.lots = data;
+      });
   }
 
   setlabel(id){
