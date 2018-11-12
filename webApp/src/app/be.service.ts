@@ -20,6 +20,7 @@ export class BEService {
   baseURL = "http://localhost:8000/";
   // baseURL = "/";
 
+  getadminURL = this.baseURL + 'get/setup/';
   plotsURL = this.baseURL + 'plots/';
   defineplotsURL = this.baseURL + 'define-plots/';
   buildingsURL = this.baseURL + 'buildings/';

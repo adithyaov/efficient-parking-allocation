@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" style="padding: 20px;">
+            <h3>Setup</h3>
+            <p>Please complete the following steps to set up the software. If you wish to visit a particular step, choose from below.</p>
+            <ol>
+                <li *ngFor="let step of steps">
+                    <a routerLink="{{states[step].link}}">{{states[step].name}}</a>
+                </li>
+            </ol>
+            <button style="margin-left: 20px" class="btn btn-success" (click)="finish()" >Continue to step 1</button>
+        </div>
+    </div>
+</div>
