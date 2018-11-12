@@ -36,13 +36,6 @@ PGroup:
 import sqlite3
 conn = sqlite3.connect('data.db')
 
-c = conn.cursor()
-c.execute('''INSERT INTO PGroup (name) 
-                VALUES 
-                    ('General'),
-                    ('Senior'),
-                    ('Handicapped')''')
-conn.commit()
 
 with open('./sql/tables.sql','r') as f:
     sql_table_creation = f.read()
@@ -57,3 +50,11 @@ with sqlite3.connect('data.db') as conn:
     c.executescript(sql_table_creation)
     # c.executescript(sql_mock)
     conn.commit()
+
+c = conn.cursor()
+c.execute('''INSERT INTO PGroup (id, name) 
+                VALUES 
+                    (0, 'General'),
+                    (1, 'Senior'),
+                    (2, 'Handicapped')''')
+conn.commit()

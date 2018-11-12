@@ -24,6 +24,8 @@ def get_nearest_spot(conn, did, gid):
                                 AND destination_id = {did}
                             ORDER BY D.distance'''\
                                 .format(did=did, gid=gid)).fetchall()
+    if len(rows) == 0:
+        return None
     row = rows[0]
     lid = row[0]
 
@@ -109,7 +111,7 @@ def init_prob(conn, p_lot_id):
     points = get_feed_points(p_lot_id) # Change this!
     c = conn.cursor()
     for point in points:
-        c.execute("INSERT OR IGNORE INTO PSpace (p_lot_id, x, y) VALUES ({lid}, {x}, {y})"\
+        c.execute("INSERT OR IGNORE INTO PSpace (p_lot_id, x, y, group_id) VALUES ({lid}, {x}, {y}, 0)"\
                         .format(lid=p_lot_id, x=point[0], y=point[1]))
     conn.commit()
     rows = c.execute('''SELECT x, y, id FROM PSpace

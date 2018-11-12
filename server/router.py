@@ -41,7 +41,7 @@ def get_lots():
 
 
 @app.route('/get/groups', methods=['GET'])
-def get_lots():
+def get_groups():
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
     rows = c.execute("SELECT id, name FROM PGroup").fetchall()
@@ -132,7 +132,10 @@ def get_eff_p(did, gid):
     did = int(did)
     gid = int(gid)
     conn = sqlite3.connect('data.db')
-    return jsonify(get_nearest_spot(conn, did, gid))
+    nps = f.get_nearest_spot(conn, did, gid)
+    if nps == None:
+        return "Error", 404
+    return jsonify(nps)
 
 @app.route('/get/parkinglots-poll', methods=['GET'])
 def get_poll():
