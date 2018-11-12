@@ -8,6 +8,7 @@ name = "pypi"
 [packages]
 flask = "==1.0.2"
 db-py = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "2.7"

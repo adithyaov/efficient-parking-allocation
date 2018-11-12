@@ -2,8 +2,11 @@ import sqlite3
 
 conn = sqlite3.connect('data.db')
 from flask import Flask, request, jsonify, make_response
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+
 
 @app.route('/post/lots')
 def post_lots():
