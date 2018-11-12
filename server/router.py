@@ -15,8 +15,8 @@ def post_lots():
     content = request.get_json()
     for x in content:
         c.execute('''INSERT INTO PLot (name, lat, long, capacity)
-                        VALUES ({name}, {lat}, {long}, {capacity})''')\
-                            .format(name=x['name'], lat=x['lat'], long=x['long'], capacity=x['capacity'])
+                        VALUES ({name}, {lat}, {long}, {capacity})'''\
+                            .format(name=x['name'], lat=x['lat'], long=x['long'], capacity=x['capacity']))
     conn.commit()
     return "Ta-da!"
 
@@ -27,8 +27,8 @@ def post_destinations():
     content = request.get_json()
     for x in content:
         c.execute('''INSERT INTO Destinations (name, lat, long)
-                        VALUES ({name}, {lat}, {long})''')\
-                            .format(name=x['name'], lat=x['lat'], long=x['long'])
+                        VALUES ({name}, {lat}, {long})'''\
+                            .format(name=x['name'], lat=x['lat'], long=x['long']))
     conn.commit()
     return "Ta-da!"
 
@@ -55,8 +55,8 @@ def post_interconnects():
     for d in destinations.keys():
         for p in destinations[d].keys():
             c.execute('''INSERT INTO DistanceGraph(p_lot_id, destination_id, distance)
-                            VALUES ({pid}, {did}, {dist})''')\
-                                .format(pid=p, did=d, dist=destinations[d][p])
+                            VALUES ({pid}, {did}, {dist})'''\
+                                .format(pid=p, did=d, dist=destinations[d][p]))
     conn.commit()
     return "Ta-da!"
 
