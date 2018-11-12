@@ -22,7 +22,7 @@ def mod2_ps_detect(park_image, thres, x_y, r, level):
 		img = cv2.medianBlur(im,5)
 		# cimg = cv2.cvtColor(im,cv2.COLOR_GRAY2BGR)		
 		
-		circles = cv2.HoughCircles(img,cv2.HOUGH_GRADIENT,1,20,param1=50,param2=30,minRadius=int(0.5*r),maxRadius=int(1.5*r))
+		circles = cv2.HoughCircles(img,cv2.HOUGH_GRADIENT,1,20,param1=50,param2=40,minRadius=int(0.5*r),maxRadius=int(1.5*r))
 		
 		if circles is not None:
 			s = 1
@@ -30,6 +30,11 @@ def mod2_ps_detect(park_image, thres, x_y, r, level):
 			for (x, y, r) in circles:
 				cv2.circle(im, (x, y), r, (0, 255, 255), 4)
 
-		state.append(s)					
+		
+		cv2.imshow("out",im)
+		cv2.waitKey(0)
+	
+		state.append(s)
+	cv2.destroyAllWindows()			
 		
 	return state
