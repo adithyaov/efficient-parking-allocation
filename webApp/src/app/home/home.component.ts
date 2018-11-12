@@ -41,7 +41,10 @@ export class HomeComponent implements OnInit {
       this.backend.getparkingspace(dest_id, group_id).subscribe((data) =>{
         this.parkingdata = data;
         document.getElementById('resultbox').style.display = 'inline-block';
-      })
+      },
+      (err)=>{
+        alert("could not find a parking space");
+      });
       console.log(dest_id);
   }
 
