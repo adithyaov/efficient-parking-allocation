@@ -32,3 +32,7 @@ print "Freeing Parking space"
 f.free_space(conn, 4)
 chk(conn)
 
+print "Getting again!"
+f.get_nearest_spot(conn, 1, 1)
+chk(conn)
+
