@@ -81,7 +81,7 @@ def init_prob(conn, p_lot_id):
     points = get_feed_points(p_lot_id) # Change this!
     c = conn.cursor()
     for point in points:
-        c.execute("INSERT INTO PSpace (p_lot_id, x, y) VALUES ({lid}, {x}, {y})"\
+        c.execute("INSERT OR IGNORE INTO PSpace (p_lot_id, x, y) VALUES ({lid}, {x}, {y})"\
                         .format(lid=p_lot_id, x=point[0], y=point[1]))
     conn.commit()
     rows = c.execute('''SELECT x, y, id FROM PSpace
