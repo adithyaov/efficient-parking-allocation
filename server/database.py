@@ -36,6 +36,13 @@ PGroup:
 import sqlite3
 conn = sqlite3.connect('data.db')
 
+c = conn.cursor()
+c.execute('''INSERT INTO PGroup (name) 
+                VALUES 
+                    ('General'),
+                    ('Senior'),
+                    ('Handicapped')''')
+conn.commit()
 
 with open('./sql/tables.sql','r') as f:
     sql_table_creation = f.read()

@@ -48,7 +48,35 @@ def get_nearest_spot(conn, did, gid):
                         .format(pid=pid, tt=tt))
     
     print lid, pid, pname
+    rows = c.execute("SELECT * FROM PLot WHERE id={id}"\
+                        .format(id=lid)).fetchall()
+    l = rows[0]
+
+    rows = c.execute("SELECT * FROM Destinations WHERE id={id}"\
+                        .format(id=did)).fetchall()
+    d = rows[0]
+
+    return_dict = {
+        'parkingspace': {
+            'id': pid,
+            'name': pname
+        },
+        'dest': {
+            'id': d[0],
+            'name': d[1],
+            'lat': d[2],
+            'long': d[3]
+        },
+        'p_lot': {
+            'id': l[0],
+            'name': l[1],
+            'lat': l[2],
+            'long': l[3],
+            'capacity': l[4]
+        }
+    }
     conn.commit()
+    return return_dict
 
 def temp_time(did):
     return 4

@@ -39,6 +39,17 @@ def get_lots():
     rows = c.execute("SELECT id, name FROM PLot").fetchall()
     return jsonify(map(lambda x: {"id": x[0], "name": x[1]}, rows))
 
+
+@app.route('/get/groups', methods=['GET'])
+def get_lots():
+    conn = sqlite3.connect('data.db')
+    c = conn.cursor()
+    rows = c.execute("SELECT id, name FROM PGroup").fetchall()
+    return jsonify(map(lambda x: {"id": x[0], "name": x[1]}, rows))
+
+
+
+
 @app.route('/get/destinations', methods=['GET'])
 def get_destinations():
     conn = sqlite3.connect('data.db')
@@ -116,7 +127,33 @@ def probe_init_image(p_lot_id):
     response.headers.set('Content-Type', 'image/jpeg')
     return response
 
+@app.route('/get/parkingspace/<did>/<gid>', methods=['GET'])
+def get_eff_p(did, gid):
+    did = int(did)
+    gid = int(gid)
+    conn = sqlite3.connect('data.db')
+    return jsonify(get_nearest_spot(conn, did, gid))
 
+@app.route('/get/parkinglots-poll', methods=['GET'])
+def get_poll():
+    conn = sqlite3.connect('data.db')
+    c = conn.cursor()
+    rows = c.execute("SELECT * FROM PLot").fetchall()
+    l = []
+    for row in rows:
+        rs = c.execute('''SELECT G.id, G.name, C.capacity FROM CurrentCapacity AS C
+                            INNER JOIN PGroup AS G ON G.id = C.group_id
+                            WHERE C.p_lot_id={lid}'''\
+                            .format(lid=row[0]))
+        l.append({
+            'id': row[0],
+            'name': row[1],
+            'lat': row[2],
+            'long': row[3],
+            'capacity': row[4],
+            'freespace': map(lambda x: {'id': x[0], 'name': x[1], 'capacity': x[2]}, rs)
+            })
 
+    return jsonify(l)
 
 app.run(host='0.0.0.0', port=8080)
