@@ -24,13 +24,14 @@ export class PSpaceComponent implements OnInit {
   setlabel(id){
       this.pspaces = null;
       this.ImageLink = null;
-      this.backend.getpspacenames(id).subscribe((data)=>{
-          this.pspaces = data;
-          this.backend.getpspaceimage(id).subscribe((img) => {
-                let urlCreator = window.URL;
+      this.backend.getpspaceimage(id).subscribe((img)=>{
+          let urlCreator = window.URL;
                 // console.log(data)
               this.ImageLink = this.sanitizer.bypassSecurityTrustUrl(
                   urlCreator.createObjectURL(img));
+          this.backend.getpspacenames(id).subscribe((data) => {
+              this.pspaces = data;
+                
               document.getElementById("pspace-div").style.display = 'inline-block';
           })
       })

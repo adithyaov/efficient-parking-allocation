@@ -57,9 +57,9 @@ def post_interconnects():
             c.execute('''INSERT OR IGNORE INTO DistanceGraph(p_lot_id, destination_id, distance)
                             VALUES ({pid}, {did}, {dist})'''\
                                 .format(pid=p, did=d, dist=destinations[d][p]))
-            c.execute('''UPDATE DistanceGraph set dist = {dist}
-                            WHERE pid = {pid}
-                                AND did = {did}'''\
+            c.execute('''UPDATE DistanceGraph set distance = {dist}
+                            WHERE p_lot_id = {pid}
+                                AND destination_id = {did}'''\
                                     .format(pid=p, did=d, dist=destinations[d][p]))
     conn.commit()
     return "Ta-da!"
@@ -69,7 +69,7 @@ def get_interconnects():
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
     rows = c.execute("SELECT p_lot_id, destination_id, distance FROM DistanceGraph").fetchall()
-    jsonify(map(lambda x: {"p_lot_id": x[0], "destination_id": x[1], "distance": x[2]})) 
+    return jsonify(map(lambda x: {"p_lot_id": x[0], "destination_id": x[1], "distance": x[2]}, rows)) 
 
 @app.route('/get/pspaces', methods=['GET'])
 def get_pspaces():
