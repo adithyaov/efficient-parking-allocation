@@ -1,15 +1,16 @@
 import sqlite3
 
-conn = sqlite3.connect('data.db')
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
+
 
 app = Flask(__name__)
 CORS(app)
 
 
-@app.route('/post/lots')
+@app.route('/post/lots', methods=['POST'])
 def post_lots():
+    conn = sqlite3.connect('data.db')
     c = conn.cursor()
     content = request.get_json()
     for x in content:
@@ -19,8 +20,9 @@ def post_lots():
     conn.commit()
     return "Ta-da!"
 
-@app.route('/post/destinations')
+@app.route('/post/destinations', methods=['POST'])
 def post_destinations():
+    conn = sqlite3.connect('data.db')
     c = conn.cursor()
     content = request.get_json()
     for x in content:
@@ -30,21 +32,24 @@ def post_destinations():
     conn.commit()
     return "Ta-da!"
 
-@app.route('/get/lots')
+@app.route('/get/lots', methods=['GET'])
 def get_lots():
+    conn = sqlite3.connect('data.db')
     c = conn.cursor()
     rows = c.execute("SELECT id, name FROM PLot").fetchall()
     return jsonify(rows)
 
-@app.route('/get/destinations')
+@app.route('/get/destinations', methods=['GET'])
 def get_destinations():
+    conn = sqlite3.connect('data.db')
     c = conn.cursor()
     rows = c.execute("SELECT id, name FROM Destinations").fetchall()
     return jsonify(rows)
 
 
-@app.route('/post/interconnects')
+@app.route('/post/interconnects', methods=['POST'])
 def post_interconnects():
+    conn = sqlite3.connect('data.db')
     c = conn.cursor()
     destinations = request.get_json()
     for d in destinations.keys():
@@ -56,21 +61,23 @@ def post_interconnects():
     return "Ta-da!"
 
 
-@app.route('/get/pspaces')
+@app.route('/get/pspaces', methods=['GET'])
 def get_pspaces():
+    conn = sqlite3.connect('data.db')
     c = conn.cursor()
     rows = c.execute("SELECT id, name FROM PSpace").fetchall()
     return jsonify(rows)
 
-@app.route('/get/pspaceimage/<id>')
+@app.route('/get/pspaceimage/<id>', methods=['GET'])
 def get_pspaceimage(id):
     # SOMEHOW GET IMAGE BINARY !!!
     response = make_response(image_binary)
     response.headers.set('Content-Type', 'image/jpeg')
     return response
 
-@app.route('/post/pspaces')
+@app.route('/post/pspaces', methods=['POST'])
 def post_pspaces():
+    conn = sqlite3.connect('data.db')
     c = conn.cursor()
     content = request.get_json()
     for x in content:
