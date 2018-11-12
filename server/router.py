@@ -116,6 +116,8 @@ def probe_init_ids(p_lot_id):
     rows = c.execute('''SELECT id, name FROM PSpace
                             WHERE p_lot_id={lid}'''\
                                 .format(lid=p_lot_id)).fetchall()
+    f.init_allocations(conn)
+    f.update_current_capacity(conn)
     return jsonify(map(lambda x: {"id": x[0], "name": x[1]}, rows))
 
 @app.route('/get/probe-image-init/<p_lot_id>', methods=['GET'])
