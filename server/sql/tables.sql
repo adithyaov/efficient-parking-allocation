@@ -1,6 +1,6 @@
-create table Plot (id int, name text, lat real, long real, capacity int);
+create table PLot (id int, name text, lat real, long real, capacity int);
 create table Destinations (id int, name text, lat real, long real);
-create table DistanceGraph (parking_id int, destination_id int, distance int);
+create table DistanceGraph (p_lot_id int, destination_id int, distance int);
 create table PSpace (id int, name text, p_lot_id int, group_id int);
 create table PGroup (id int, name text);
 
