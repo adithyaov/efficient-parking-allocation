@@ -25,7 +25,14 @@
                                             </tr>
                                             <tr>
                                                 <td>Free spaces:</td>
-                                                <td>{{plot.freespace}}</td>
+                                                <!-- <td>{{plot.freespace}}</td> -->
+                                                <td>
+                                                    <ul>
+                                                        <li *ngFor="let freespace of plot.freespace">
+                                                            {{freespace.name}}: {{freespace.capacity}}
+                                                        </li>
+                                                    </ul>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

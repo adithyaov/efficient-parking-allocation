@@ -23,7 +23,10 @@
                             <tr *ngFor="let pspace of pspaces">
                                 <td>{{pspace.id}}</td>
                                 <td><input type="text" [(ngModel)]="pspace.name"></td>
-                                <td><input type="text" [(ngModel)]="pspace.group"></td>
+                                <!-- <td><input type="text" [(ngModel)]="pspace.group"></td> -->
+                                <td><select [(ngModel)]="pspace.group">
+                                    <option *ngFor="let group of groups" [value]="group.id">{{group.name}}</option>
+                                </select></td>
                             </tr>
                         </tbody>
                     </table>

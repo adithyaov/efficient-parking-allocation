@@ -14,11 +14,15 @@ export class PSpaceComponent implements OnInit {
   lots;
   pspaces;
   ImageLink;
+  groups;
 
   ngOnInit() {
       this.backend.getlots().subscribe((data) => {
           this.lots = data;
       });
+      this.backend.getgroups().subscribe((data)=>{
+        this.groups = data;
+      })
   }
 
   setlabel(id){
