@@ -18,10 +18,12 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Label</th>
+                                <th>Group</th>
                             </tr>
                             <tr *ngFor="let pspace of pspaces">
                                 <td>{{pspace.id}}</td>
                                 <td><input type="text" [(ngModel)]="pspace.name"></td>
+                                <td><input type="text" [(ngModel)]="pspace.group"></td>
                             </tr>
                         </tbody>
                     </table>
