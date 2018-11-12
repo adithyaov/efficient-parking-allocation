@@ -35,7 +35,7 @@ export class BEService {
 
   getparkingspaceURL = this.baseURL + 'get/parkingspace';
   getgroupsURL = this.baseURL + 'get/groups';
-  getparkinglots_pollURL = this.baseURL + '/get/parkinglots-poll';
+  getparkinglots_pollURL = this.baseURL + 'get/parkinglots-poll';
 
   postlots(lots){
       return this.http.post(this.postplotsURL, lots, {responseType: 'text'});
