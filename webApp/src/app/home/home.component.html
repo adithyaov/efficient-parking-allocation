@@ -40,10 +40,14 @@
                     Select destination: <select id="destination_select">
                         <option *ngFor="let dest of destinations" [value]="dest.id">{{dest.name}}</option>
                     </select>
-                    <input type="number" id="blat" value="37.3652" style="display: none;">
+                    <!-- <input type="number" id="blat" value="37.3652" style="display: none;">
                     <input type="number" id="blng" value="37.3652" style="display: none;">
                     <input type="number" id="elat" value="37.6652" style="display: none;">
-                    <input type="number" id="elng" value="37.6652" style="display: none;">
+                    <input type="number" id="elng" value="37.6652" style="display: none;"> -->
+                    <input type="number" id="blat" [value]="parkingdata.p_lot.lat" style="display: none;">
+                    <input type="number" id="blng" [value]="parkingdata.p_lot.long" style="display: none;">
+                    <input type="number" id="elat" [value]="parkingdata.dest.lat" style="display: none;">
+                    <input type="number" id="elng" [value]="parkingdata.dest.long" style="display: none;">
                     <button class="btn btn-success" (click)="getparking()" >Go</button>
                     <button class="btn btn-success" id="navbtn">Navigate from parking lot to destination</button>
                     <div id="map" style="height:100%"></div>
