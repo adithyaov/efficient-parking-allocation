@@ -40,7 +40,13 @@ conn = sqlite3.connect('data.db')
 with open('./sql/tables.sql','r') as f:
     sql_table_creation = f.read()
 
+
+with open('./sql/mock.sql','r') as f:
+    sql_mock = f.read()
+
+
 with sqlite3.connect('data.db') as conn:
     c = conn.cursor()
     c.executescript(sql_table_creation)
+    c.executescript(sql_mock)
     conn.commit()

@@ -1,9 +1,34 @@
-create table PLot (id int, name text, lat real, long real, capacity int);
-create table Destinations (id int, name text, lat real, long real);
-create table DistanceGraph (p_lot_id int, destination_id int, distance int);
-create table PSpace (id int, name text, p_lot_id int, group_id int);
-create table PGroup (id int, name text);
+CREATE TABLE PLot (id INT PRIMARY KEY, 
+	name TEXT, 
+	lat REAL, 
+	long REAL, 
+	capacity INT);
 
-create table TempReserves (p_space_id int, till_timestamp int);
-create table Allocations (p_space_id int, reserved bool);
-create table CurrentCapacity (p_lot_id int, group_id int, capacity int);
+CREATE TABLE Destinations (id INT PRIMARY KEY, 
+	name TEXT, 
+	lat REAL, 
+	long REAL);
+
+CREATE TABLE DistanceGraph (p_lot_id INT, 
+	destination_id INT, 
+	distance INT,
+	CONSTRAINT UNQPD UNIQUE (p_lot_id, destination_id));
+
+CREATE TABLE PSpace (id INT PRIMARY KEY, 
+	name TEXT, 
+	p_lot_id INT, 
+	group_id INT);
+
+CREATE TABLE PGroup (id INT PRIMARY KEY, 
+	name TEXT);
+
+CREATE TABLE TempReserves (p_space_id INT, 
+	till_timestamp INT);
+
+CREATE TABLE Allocations (p_space_id INT PRIMARY KEY, 
+	reserved BOOL);
+
+CREATE TABLE CurrentCapacity (p_lot_id INT, 
+	group_id INT, 
+	capacity INT, 
+	CONSTRAINT UNQIDF UNIQUE (p_lot_id, group_id));
