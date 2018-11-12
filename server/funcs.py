@@ -4,6 +4,7 @@ def update_current_capacity(conn):
                             INNER JOIN PSpace AS P ON A.p_space_id = P.id 
                             WHERE A.reserved=0 
                             GROUP BY P.p_lot_id, P.group_id''').fetchall()
+    print rows
     for row in rows:
         c.execute("INSERT OR IGNORE INTO CurrentCapacity (p_lot_id, group_id, capacity) VALUES ({lid}, {gid}, {c})"\
                     .format(lid=row[0], gid=row[1], c=row[2]))
@@ -48,6 +49,14 @@ def get_nearest_spot(conn, did, gid):
 
 def temp_time(did):
     return 4
+
+def free_space(conn, pid):
+    c = conn.cursor()
+    c.execute('''UPDATE Allocations SET reserved = 0 
+                    WHERE p_space_id = {pid}'''\
+                        .format(pid=pid))
+    update_current_capacity(conn)
+    conn.commit()
 
 def modify_allocation(conn, id, reserved):
     c = conn.cursor()
