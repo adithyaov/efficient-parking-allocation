@@ -148,10 +148,18 @@ def get_poll():
     l = []
     for row in rows:
         f.poll_cam_feed(conn, row[0])
+        
+        rs = c.execute("SELECT P_space_id FROM TempReserves").fetchall()
+        for r in rs:
+            c.execute('''UPDATE Allocations SET reserved=1
+                           WHERE p_space_id = {pid}'''\
+                                .format(pid=r[0]))
+        conn.commit()
+        
         rs = c.execute('''SELECT G.id, G.name, C.capacity FROM CurrentCapacity AS C
                             INNER JOIN PGroup AS G ON G.id = C.group_id
                             WHERE C.p_lot_id={lid}'''\
-                            .format(lid=row[0]))
+                                .format(lid=row[0]))
         l.append({
             'id': row[0],
             'name': row[1],
