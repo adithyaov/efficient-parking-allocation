@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {globals} from './globals/globals';
 import { of } from 'rxjs/observable/of'
+import {Observable} from 'rxjs/Rx';
+import 'rxjs/Rx';
 
 const httpOptions = {
 headers: new HttpHeaders({
@@ -102,5 +104,10 @@ export class BEService {
 
   getparkinglots_poll(){
     return this.http.get(this.getparkinglots_pollURL, {responseType: 'json'});
+  }
+
+  poll_getparkinglots(){
+    return Observable.interval(5000) 
+        .switchMap(() => this.http.get(this.getparkinglots_pollURL).map((data:Response) => data.json()));
   }
 }

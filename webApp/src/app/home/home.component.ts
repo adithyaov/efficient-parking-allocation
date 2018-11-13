@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {BEService} from '../be.service';
 import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
-  constructor(private backend: BEService, private router:Router) { }
+  constructor(private backend: BEService, private router:Router) { 
+    this.backend.poll_getparkinglots().subscribe((data)=>{
+                this.plots = data;
+              })
+   }
   plots:any = [];
   destinations:any = [];
   parkingdata;
   groups;
+  pollingdata:any;
 
   ngOnInit() {
       // this.plots.push({'name': 'PLot 54D', 'lat': 25.36, 'long': 66.321, 'capacity': 12, 'freespace': 5});
@@ -40,6 +46,7 @@ export class HomeComponent implements OnInit {
       // script.onload = this.onMathJaxLoaded.bind(this);
       script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC6x3DiwoaU4g_Cu_L2Oi-xuGHKwvMLc7E&callback=initMap';
       this.parkingdata = {'p_lot': {'lat': 0, 'long': 0, 'name': ''}, 'dest': {'lat': 0, 'long': 0}, 'parkingspace':{'name': ''}};
+
   }
 
   getparking(){
@@ -54,5 +61,9 @@ export class HomeComponent implements OnInit {
       });
       console.log(dest_id);
   }
+
+  ngOnDestroy() {
+    this.pollingdata.unsubscribe();
+}
 
 }
