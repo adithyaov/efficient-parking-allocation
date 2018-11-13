@@ -108,6 +108,6 @@ export class BEService {
 
   poll_getparkinglots(){
     return Observable.interval(5000) 
-        .switchMap(() => this.http.get(this.getparkinglots_pollURL).map((data:Response) => data.json()));
+        .switchMap(() => this.http.get(this.getparkinglots_pollURL, {responseType: 'json'}).map(data => data));
   }
 }
