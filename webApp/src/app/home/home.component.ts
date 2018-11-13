@@ -27,6 +27,9 @@ export class HomeComponent implements OnInit {
         this.plots = data;
       });
       this.backend.getbuildings().subscribe((data) =>{
+        if(data == []){
+          this.router.navigateByUrl('/admin');
+        }
         this.destinations = data;
       })
       this.backend.getgroups().subscribe((data)=>{
