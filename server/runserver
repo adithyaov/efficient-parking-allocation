@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm data.db;
+python database.py;
+python router.py;
