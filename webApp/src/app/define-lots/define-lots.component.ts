@@ -16,7 +16,7 @@ export class DefineLotsComponent implements OnInit {
   baseURL = this.backend.baseURL;
 
   ngOnInit() {
-      this.plots = [{'sl': 0,'name': 'test', 'lat': 25.3, 'long': 63.3, 'capacity': 23, 'image': null}];
+      this.plots = [{'sl': 0,'name': 'PL002', 'lat': 1.3185461, 'long': 103.8619946, 'capacity': 23, 'image': null}];
   }
 
   addrow(){

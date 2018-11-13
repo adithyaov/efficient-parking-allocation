@@ -10,7 +10,7 @@ import {BEService} from '../be.service';
 export class BuildingsComponent implements OnInit {
 
   building_name = "";
-  buildings = [{'name': '', 'lat': 0, 'long': 0}];
+  buildings = [{'name': 'NEC', 'lat': 1.3172116, 'long': 103.8631046}];
   constructor(private backend:BEService, private router:Router) { }
 
   ngOnInit() {
