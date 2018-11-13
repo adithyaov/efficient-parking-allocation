@@ -102,9 +102,9 @@ def post_pspaces():
     c = conn.cursor()
     content = request.get_json()
     for x in content:
-        c.execute('''UPDATE PSpace set name="{name}"
+        c.execute('''UPDATE PSpace set name="{name}", group_id={gid}
                         WHERE id={id}'''\
-                            .format(id=x['id'], name=x['name']))
+                            .format(id=x['id'], name=x['name'], gid=x['group']))
     conn.commit()
     return "Ta-da!"
 
