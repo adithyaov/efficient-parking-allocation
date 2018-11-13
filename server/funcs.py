@@ -108,6 +108,7 @@ def init_allocations(conn):
         modify_allocation(conn, row[0], 0)
     
 def init_prob(conn, p_lot_id):
+    # p_lot_id = int(p_lot_id)
     points = get_feed_points(p_lot_id) # Change this!
     c = conn.cursor()
     for point in points:
