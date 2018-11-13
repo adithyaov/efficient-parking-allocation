@@ -44,17 +44,22 @@ def mark_points(p_lot_id, rows):
 
 	return f.read()
 
-def some_func(p_lot_id, x_y):
+def get_current_state(p_lot_id, rows):
 	live_stream = VS(src=p_lot_id).start()
 	time.sleep(2.0)
 
-	cr = 18
+	cr = 16
+	fc = 0.6
 
 	img = live_stream.read()
 	ref = cv2.imread('/home/saki/ISH-2018/imageProcessing/refs/'+str(p_lot_id)+'ref.jpg')
 
+	live_stream.stop()
+
 	img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	ref = cv2.cvtColor(ref, cv2.COLOR_BGR2GRAY)
+	x_y = map(lambda x: [x[0], x[1]], rows)
+	ids = map(lambda x: x[2], rows)
 
 	ref_crop = cv_func.crop_image(ref, x_y, cr)
 	img_crop = cv_func.crop_image(img, x_y, cr)
@@ -63,15 +68,14 @@ def some_func(p_lot_id, x_y):
 
 	for x in range(len(ref_crop)):
 		(score, diff) = compare_ssim(ref_crop[x], img_crop[x], full=True)
-		diff = (diff * 255).astype("uint8")
-		cv2.imshow("diff", diff)
-		cv2.waitKey(0)
+		if score < fc:
+			score = 1
+		else:
+			score = 0
 		norm.append(score)
-	
-	cv2.destroyAllWindows()
-	live_stream.stop()
 
-	return norm
+
+	return zip(ids, norm)
 
 
 def mod0_ps_bond(image, thres, level):

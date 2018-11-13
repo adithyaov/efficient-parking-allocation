@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0, '../imageProcessing/class')
-from modules import get_feed_points, mark_points
+from modules import get_feed_points, mark_points, get_current_state
 
 def update_current_capacity(conn):
     c = conn.cursor()
@@ -8,6 +8,9 @@ def update_current_capacity(conn):
                             INNER JOIN PSpace AS P ON A.p_space_id = P.id 
                             WHERE A.reserved=0 
                             GROUP BY P.p_lot_id, P.group_id''').fetchall()
+
+    c.execute("UPDATE CurrentCapacity SET capacity = 0")
+
     for row in rows:
         c.execute("INSERT OR IGNORE INTO CurrentCapacity (p_lot_id, group_id, capacity) VALUES ({lid}, {gid}, {c})"\
                     .format(lid=row[0], gid=row[1], c=row[2]))
@@ -100,6 +103,14 @@ def modify_allocation(conn, id, reserved):
                     WHERE p_space_id = {id}'''\
                         .format(id=id, reserved=reserved))
     conn.commit()
+
+def poll_cam_feed(conn, p_lot_id):
+    c = conn.cursor()
+    rows = c.execute("SELECT x, y, id FROM PSpace WHERE p_lot_id={lid}"\
+                        .format(lid=p_lot_id)).fetchall()
+    correct_states = get_current_state(p_lot_id, rows)
+    for x in correct_states:
+        modify_allocation(conn, x[0], x[1])
 
 def init_allocations(conn):
     c = conn.cursor()

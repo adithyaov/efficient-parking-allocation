@@ -3,13 +3,17 @@ import time
 import modules
 import cv_func
 
-x_y = modules.get_feed_points(1)
+x_y = [[40, 69, 1], [12, 43, 2], [65, 83, 3]]
 
-time.sleep(2.0)
+print modules.get_current_state(1,x_y)
 
-norm = modules.some_func(1, x_y)
+# x_y = modules.get_feed_points(1)
 
-print norm
+# time.sleep(2.0)
+
+# norm = modules.some_func(1, x_y)
+
+# print norm
 
 # image = cv2.imread('park_space_uc.jpg')
 # x_y_bond = modules.mod0_ps_bond(image, 225, 1)

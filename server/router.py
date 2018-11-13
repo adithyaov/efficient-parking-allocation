@@ -104,7 +104,7 @@ def post_pspaces():
     for x in content:
         c.execute('''UPDATE PSpace set name="{name}", group_id={gid}
                         WHERE id={id}'''\
-                            .format(id=x['id'], name=x['name'], gid=x['group']))
+                            .format(id=x['id'], name=x['name'], gid=int(x['group'])))
     conn.commit()
     return "Ta-da!"
 
@@ -147,6 +147,7 @@ def get_poll():
     rows = c.execute("SELECT * FROM PLot").fetchall()
     l = []
     for row in rows:
+        f.poll_cam_feed(conn, row[0])
         rs = c.execute('''SELECT G.id, G.name, C.capacity FROM CurrentCapacity AS C
                             INNER JOIN PGroup AS G ON G.id = C.group_id
                             WHERE C.p_lot_id={lid}'''\

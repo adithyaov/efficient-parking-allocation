@@ -44,6 +44,7 @@ export class PSpaceComponent implements OnInit {
   finish(){
       this.backend.postpspacenames(this.pspaces).subscribe((data)=>{
           console.log(data);
+          alert('Updated :-)');
       });
   }
 
