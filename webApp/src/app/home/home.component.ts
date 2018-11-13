@@ -11,9 +11,7 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private backend: BEService, private router:Router) { 
-    this.backend.poll_getparkinglots().subscribe((data)=>{
-                this.plots = data;
-              })
+    
    }
   plots:any = [];
   destinations:any = [];
@@ -46,7 +44,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       // script.onload = this.onMathJaxLoaded.bind(this);
       script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC6x3DiwoaU4g_Cu_L2Oi-xuGHKwvMLc7E&callback=initMap';
       this.parkingdata = {'p_lot': {'lat': 0, 'long': 0, 'name': ''}, 'dest': {'lat': 0, 'long': 0}, 'parkingspace':{'name': ''}};
-
+      this.pollingdata = this.backend.poll_getparkinglots().subscribe((data)=>{
+                this.plots = data;
+              })
   }
 
   getparking(){
